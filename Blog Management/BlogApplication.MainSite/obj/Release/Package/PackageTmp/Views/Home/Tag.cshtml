@@ -1,0 +1,15 @@
+﻿
+@using BlogApplication.Framework.Extensions.StringExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Blog.Tag>
+
+<h4>@Html.GetWord("Tags")</h4>
+
+<div class="col-lg-12">
+            @foreach (var tag in Model.Data)
+            {
+                <a class="homeTagLink" href="@Url.RouteUrl("Tag", new {lg = Html.GetLanguageShort(), name = tag.Name.RemoveSpace().ReplaceTurkishCharactes(), ID = tag.ID})">
+                    #@Html.GetWord(tag.Name)
+                </a>
+            } 
+</div>

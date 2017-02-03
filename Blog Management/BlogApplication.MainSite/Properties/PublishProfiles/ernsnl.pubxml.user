@@ -1,0 +1,508 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Websites\ernsnl</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>10/15/2015 00:49:11</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.BusinessLayer.dll">
+      <publishTime>01/13/2016 21:22:00</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.Connection.dll">
+      <publishTime>01/13/2016 21:22:00</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.Data.dll">
+      <publishTime>01/13/2016 21:21:59</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.Entity.dll">
+      <publishTime>01/13/2016 21:21:59</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.Framework.dll">
+      <publishTime>01/13/2016 00:49:05</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.MainSite.dll">
+      <publishTime>01/13/2016 21:25:18</publishTime>
+    </File>
+    <File Include="bin/BlogApplication.WebFramework.dll">
+      <publishTime>01/13/2016 21:22:00</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>10/15/2015 20:01:18</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>10/15/2015 00:49:11</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/15/2015 00:49:12</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>11/29/2015 12:40:53</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>10/15/2015 00:49:11</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>10/15/2015 00:49:10</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>10/15/2015 00:49:11</publishTime>
+    </File>
+    <File Include="Files/Css/BlogApp.css">
+      <publishTime>01/13/2016 20:38:13</publishTime>
+    </File>
+    <File Include="Files/Css/bootstrap.css">
+      <publishTime>12/13/2015 16:32:24</publishTime>
+    </File>
+    <File Include="Files/Css/bootstrap.min.css">
+      <publishTime>12/12/2015 22:09:49</publishTime>
+    </File>
+    <File Include="Files/Css/business-casual.css">
+      <publishTime>01/13/2016 19:15:24</publishTime>
+    </File>
+    <File Include="Files/fonts/glyphicons-halflings-regular.eot">
+      <publishTime>12/12/2015 22:10:07</publishTime>
+    </File>
+    <File Include="Files/fonts/glyphicons-halflings-regular.svg">
+      <publishTime>12/12/2015 22:10:07</publishTime>
+    </File>
+    <File Include="Files/fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>12/12/2015 22:10:07</publishTime>
+    </File>
+    <File Include="Files/fonts/glyphicons-halflings-regular.woff">
+      <publishTime>12/12/2015 22:10:07</publishTime>
+    </File>
+    <File Include="Files/fonts/glyphicons-halflings-regular.woff2">
+      <publishTime>12/12/2015 22:10:07</publishTime>
+    </File>
+    <File Include="Files/Images/bg.jpg">
+      <publishTime>12/13/2015 00:20:45</publishTime>
+    </File>
+    <File Include="Files/Images/bg.png">
+      <publishTime>12/13/2015 00:01:53</publishTime>
+    </File>
+    <File Include="Files/Js/BlogAppLive.js">
+      <publishTime>01/12/2016 15:59:33</publishTime>
+    </File>
+    <File Include="Files/Js/bootstrap.js">
+      <publishTime>12/12/2015 22:10:19</publishTime>
+    </File>
+    <File Include="Files/Js/bootstrap.min.js">
+      <publishTime>12/12/2015 22:10:19</publishTime>
+    </File>
+    <File Include="Files/Js/jquery.js">
+      <publishTime>12/12/2015 22:10:19</publishTime>
+    </File>
+    <File Include="Files/Plugins/Embed/embed.css">
+      <publishTime>12/18/2015 16:38:58</publishTime>
+    </File>
+    <File Include="Files/Plugins/Embed/embed.css.map">
+      <publishTime>12/18/2015 16:38:58</publishTime>
+    </File>
+    <File Include="Files/Plugins/Embed/embed.js">
+      <publishTime>12/18/2015 16:38:58</publishTime>
+    </File>
+    <File Include="Files/Plugins/Embed/embed.js.map">
+      <publishTime>12/18/2015 16:38:58</publishTime>
+    </File>
+    <File Include="Files/Plugins/FamFam/FamFam.css">
+      <publishTime>12/14/2015 22:45:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/FamFam/famfamfam-flags.png">
+      <publishTime>12/14/2015 22:44:41</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/froala_editor.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/froala_editor.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/froala_style.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/froala_style.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/char_counter.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/code_view.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/colors.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/emoticons.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/file.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/fullscreen.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/image.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/image_manager.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/line_breaker.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/table.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/plugins/video.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/themes/dark.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/themes/gray.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/themes/red.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/css/themes/royal.min.css">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/froala_editor.min.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ar.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/bs.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/cs.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/da.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/de.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/en_ca.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/en_gb.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/en_us.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/es.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/et.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/fa.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/fi.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/fr.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/he.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/hr.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/hu.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/id.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/it.js">
+      <publishTime>12/13/2015 23:23:33</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ja.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ko.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/me.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/nb.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/nl.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/pl.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/pt_br.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/pt_pt.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ro.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ru.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/sr.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/sv.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/th.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/tr.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/ua.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/uk.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/zh_cn.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/langs/zh_tw.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/align.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/block_styles.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/char_counter.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/code_beautifier.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/code_view.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/colors.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/emoticons.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/entities.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/file.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/file_upload.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/font_family.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/font_size.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/fullscreen.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/image.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/image_manager.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/inline_style.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/inline_styles.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/line_breaker.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/link.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/lists.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/media_manager.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/paragraph_format.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/paragraph_style.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/quote.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/save.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/table.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/tables.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/url.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/urls.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/frola/js/plugins/video.min.js">
+      <publishTime>12/13/2015 23:23:34</publishTime>
+    </File>
+    <File Include="Files/Plugins/jquery-unveil/unveil.js">
+      <publishTime>01/07/2016 01:13:08</publishTime>
+    </File>
+    <File Include="Files/Plugins/LazyLoad/jquery.lazyload.js">
+      <publishTime>01/02/2016 23:11:42</publishTime>
+    </File>
+    <File Include="Files/Plugins/Pagination/jquery.twbsPagination.js">
+      <publishTime>01/13/2016 16:14:09</publishTime>
+    </File>
+    <File Include="Files/Plugins/ScrollBar/perfect-scrollbar.jquery.min.js">
+      <publishTime>01/12/2016 15:52:11</publishTime>
+    </File>
+    <File Include="Files/Plugins/ScrollBar/perfect-scrollbar.min.css">
+      <publishTime>01/12/2016 15:52:20</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>11/29/2015 12:41:52</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>12/13/2015 00:14:49</publishTime>
+    </File>
+    <File Include="Views/Blog/BlogList.cshtml">
+      <publishTime>01/13/2016 16:24:05</publishTime>
+    </File>
+    <File Include="Views/Blog/ViewBlog.cshtml">
+      <publishTime>01/11/2016 16:03:56</publishTime>
+    </File>
+    <File Include="Views/CustomPage/CustomPageHandler.cshtml">
+      <publishTime>01/11/2016 16:30:47</publishTime>
+    </File>
+    <File Include="Views/ErrorPage/Oops.cshtml">
+      <publishTime>12/31/2015 18:29:55</publishTime>
+    </File>
+    <File Include="Views/Home/Advertise.cshtml">
+      <publishTime>01/13/2016 21:05:33</publishTime>
+    </File>
+    <File Include="Views/Home/Category.cshtml">
+      <publishTime>01/11/2016 15:41:27</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>01/13/2016 20:48:02</publishTime>
+    </File>
+    <File Include="Views/Home/Slider.cshtml">
+      <publishTime>01/11/2016 16:14:39</publishTime>
+    </File>
+    <File Include="Views/Home/Tag.cshtml">
+      <publishTime>01/13/2016 20:12:06</publishTime>
+    </File>
+    <File Include="Views/Layout/Editor.cshtml">
+      <publishTime>01/12/2016 14:46:38</publishTime>
+    </File>
+    <File Include="Views/Layout/Footer.cshtml">
+      <publishTime>01/13/2016 16:29:53</publishTime>
+    </File>
+    <File Include="Views/Layout/NavMenu.cshtml">
+      <publishTime>01/12/2016 02:35:19</publishTime>
+    </File>
+    <File Include="Views/Layout/SiteMap.cshtml">
+      <publishTime>01/12/2016 16:04:30</publishTime>
+    </File>
+    <File Include="Views/Layout/Social.cshtml">
+      <publishTime>01/13/2016 19:20:37</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>11/29/2015 12:41:50</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>01/12/2016 15:56:01</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>11/29/2015 12:41:52</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>11/29/2015 12:41:51</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>01/13/2016 21:25:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="alpha.ernsnl.com" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Eren\ Senel\\Documents\\Visual\ Studio\ 2015\\Projects\\BlogApplication\\BlogApplication\.MainSite\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Eren\ Senel\\Documents\\Visual\ Studio\ 2015\\Projects\\BlogApplication\\BlogApplication\.MainSite\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="BlogApplicationEntities-Web.config Connection String" description="" value="metadata=res://*/BlogApplicationModel.csdl|res://*/BlogApplicationModel.ssdl|res://*/BlogApplicationModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=188.121.44.214;initial catalog=BlogApplication;persist security info=True;user id=ernsnl;password=E729467Es;MultipleActiveResultSets=True;App=EntityFramework&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Eren\ Senel\\Documents\\Visual\ Studio\ 2015\\Projects\\BlogApplication\\BlogApplication\.MainSite\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='BlogApplicationEntities']/@connectionString" />
+  </parameter>
+</parameters>

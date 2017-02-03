@@ -1,0 +1,62 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.EnumExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Visa.User
+
+@{
+    ViewBag.Title = Html.GetWord("View Profile");
+}
+
+<h2> @Html.GetWord("View Profile") </h2>
+@Html.HiddenFor(model => model.ID)
+<input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0" />
+
+<div class="col-lg-6 col-lg-offset-3">
+
+    <div class="display-group">
+        <label class="control-label col-lg-6">@Html.GetWord("First Name"): </label>
+        <span class="display-value col-lg-6">
+            @Html.DisplayFor(model => model.FirstName)
+        </span>
+    </div>
+
+    <div class="display-group">
+        <label class="control-label col-lg-6">@Html.GetWord("Last Name"): </label>
+        <span class="display-value col-lg-6">
+            @Html.DisplayFor(model => model.LastName)
+        </span>
+    </div>
+
+    <div class="display-group">
+        <label class="control-label col-lg-6">@Html.GetWord("Username"): </label>
+        <span class="display-value col-lg-6">
+            @Html.DisplayFor(model => model.Username)
+        </span>
+    </div>
+
+    <div class="display-group">
+        <label class="control-label col-lg-6">@Html.GetWord("Email"): </label>
+        <span class="display-value col-lg-6">
+            @Html.DisplayFor(model => model.Email)
+        </span>
+    </div>
+
+    <div class="display-group">
+        <label class="control-label col-lg-6">@Html.GetWord("Language"): </label>
+        <span class="display-value col-lg-6">
+            @Html.GetLanguageName(Convert.ToInt64(Model.MainLanguageID))
+        </span>
+    </div>
+
+    <div class="display-button" style="text-align: center;">
+        <a href="@Url.Action("EditProfile", "Visa")" value="@Html.GetWord("Edit")" class="btn btn-primary btn-lg ">@Html.GetWord("Edit")</a>
+    </div>
+
+</div>
+@section scripts{
+    <script>
+    $(document).ready(function() {
+        
+    });
+</script>
+}

@@ -1,0 +1,34 @@
+﻿@using BlogApplication.WebFramework.HtmlExtensions
+@model List<BlogApplication.Data.General.Language>
+<!-- Navigation -->
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+        <a class="navbar-brand" href="@Url.Action("Index","Home")">@Html.GetDomainName()</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            @Html.Action("Editor")
+            <ul class="nav navbar-nav small-navbar-nav ">
+                @foreach (var lang in Model)
+                {
+                    <li>
+                        <a href="@Html.ChangeLanguage(lang.CodeISO)">
+                            <i class="famfamfam-flag-@lang.CodeISO.Split('-')[0]"></i>  @lang.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+
+
+    </nav>

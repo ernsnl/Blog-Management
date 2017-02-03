@@ -1,0 +1,1356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BlogApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BlogContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="CoverImgName" Type="varchar" MaxLength="100" />
+          <Property Name="HtmlContent" Type="nvarchar(max)" />
+          <Property Name="CategoryID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="bigint" />
+          <Property Name="BlogStatus" Type="tinyint" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="BlogAbstract" Type="nvarchar" MaxLength="500" />
+          <Property Name="PublishDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="BlogReview">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogID" Type="bigint" />
+          <Property Name="ReviewMessage" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="bigint" />
+        </EntityType>
+        <EntityType Name="BlogSEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogID" Type="bigint" />
+          <Property Name="LanguageID" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="BlogTag">
+          <Key>
+            <PropertyRef Name="BlogID" />
+            <PropertyRef Name="TagID" />
+          </Key>
+          <Property Name="BlogID" Type="bigint" Nullable="false" />
+          <Property Name="TagID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="ImgName" Type="varchar(max)" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="DomainID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CustomPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomPageUrl" Type="varchar" MaxLength="150" />
+          <Property Name="HtmlContent" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="CustomPageSEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomPageID" Type="bigint" />
+          <Property Name="LanguageID" Type="bigint" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="DomainID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="15" />
+          <Property Name="Type" Type="tinyint" />
+          <Property Name="ExpireDate" Type="datetime2" Precision="7" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="UserID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="CodeISO" Type="varchar" MaxLength="10" />
+          <Property Name="CodeISO_3" Type="varchar" MaxLength="20" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="bigint" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedUser" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LogContent" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DomainName" Type="varchar" MaxLength="150" />
+          <Property Name="DomainUrl" Type="varchar" MaxLength="250" />
+          <Property Name="DomainImgName" Type="varchar" MaxLength="100" />
+          <Property Name="SmtpHost" Type="varchar" MaxLength="50" />
+          <Property Name="SmtpPassword" Type="varchar" MaxLength="50" />
+          <Property Name="SmtpPort" Type="varchar" MaxLength="10" />
+          <Property Name="Username" Type="varchar" MaxLength="50" />
+          <Property Name="EnableSSL" Type="bit" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="UpdatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedUser" Type="bigint" />
+          <Property Name="UpdatedUser" Type="bigint" />
+          <Property Name="DefaultLanguage" Type="bigint" />
+          <Property Name="AdminEmail" Type="varchar" MaxLength="150" />
+          <Property Name="AdminUsername" Type="varchar" MaxLength="150" />
+          <Property Name="AdminPassword" Type="varchar" MaxLength="32" />
+          <Property Name="ConsoleDomainUrl" Type="varchar" MaxLength="250" />
+          <Property Name="DisqusUserName" Type="varchar" MaxLength="250" />
+          <Property Name="FavIcon" Type="varchar" MaxLength="250" />
+          <Property Name="CDNUrl" Type="varchar" MaxLength="500" />
+          <Property Name="FTPUsername" Type="varchar" MaxLength="500" />
+          <Property Name="FTPPassword" Type="varchar" MaxLength="500" />
+          <Property Name="GoogleAnalyticsID" Type="varchar" MaxLength="150" />
+          <Property Name="FacebookAppID" Type="varchar" MaxLength="150" />
+          <Property Name="TwitterUserName" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DomainSocial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SocialMediaType" Type="tinyint" />
+          <Property Name="SocialMediaUrl" Type="varchar" MaxLength="250" />
+          <Property Name="SocialMediaPitch" Type="varchar" MaxLength="250" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="LanguageList">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+            <PropertyRef Name="DomainID" />
+          </Key>
+          <Property Name="LanguageID" Type="bigint" Nullable="false" />
+          <Property Name="DomainID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MailList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" />
+          <Property Name="DomainID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="NavigationEditor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EditorLocation" Type="tinyint" />
+          <Property Name="EditorData" Type="varchar(max)" />
+          <Property Name="DomainID" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Keyword" Type="nvarchar" MaxLength="1000" />
+          <Property Name="DomainID" Type="bigint" />
+          <Property Name="LanguageID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="LocationID" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="BlogTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="BlogID" Type="bigint" Nullable="false" />
+          <Property Name="LanguageID" Type="bigint" Nullable="false" />
+          <Property Name="TranslationHtml" Type="nvarchar" MaxLength="4000" />
+          <Property Name="AbstractTranslation" Type="nvarchar" MaxLength="500" />
+          <Property Name="TranslationTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CategoryTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CategoryID" Type="bigint" Nullable="false" />
+          <Property Name="LanguageID" Type="bigint" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar" MaxLength="500" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Common">
+          <Key>
+            <PropertyRef Name="Keyword" />
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="Keyword" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="LanguageID" Type="bigint" Nullable="false" />
+          <Property Name="Translation" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CustomPageTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CustomPageID" Type="bigint" Nullable="false" />
+          <Property Name="LanguageID" Type="bigint" Nullable="false" />
+          <Property Name="TranslationHtml" Type="nvarchar(max)" />
+          <Property Name="TranslationTitle" Type="nvarchar" MaxLength="250" />
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="32" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar(max)" />
+          <Property Name="PaswordSalt" Type="varchar" MaxLength="100" />
+          <Property Name="MainLanguageID" Type="bigint" />
+          <Property Name="StatusID" Type="tinyint" />
+          <Property Name="UserType" Type="tinyint" />
+          <Property Name="UserProfilePic" Type="varchar(max)" />
+          <Property Name="DomainID" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__BlogConte__Categ__276EDEB3">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogContent">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogRevie__BlogI__5FB337D6">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="0..1" />
+          <End Role="BlogReview" Type="Self.BlogReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogReview">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogSEOIn__BlogI__534D60F1">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="0..1" />
+          <End Role="BlogSEOInformation" Type="Self.BlogSEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogSEOInformation">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogTag__BlogID__3D5E1FD2">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="1" />
+          <End Role="BlogTag" Type="Self.BlogTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogTag">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogTag__TagID__3E52440B">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1" />
+          <End Role="BlogTag" Type="Self.BlogTag" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogTag">
+              <PropertyRef Name="TagID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogTrans__BlogI__2E1BDC42">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="1" />
+          <End Role="BlogTranslation" Type="Self.BlogTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogTranslation">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryT__Categ__2B3F6F97">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryTranslation" Type="Self.CategoryTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryTranslation">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomPag__Custo__5070F446">
+          <End Role="CustomPageContent" Type="Self.CustomPageContent" Multiplicity="1" />
+          <End Role="CustomPageTranslation" Type="Self.CustomPageTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomPageContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomPageTranslation">
+              <PropertyRef Name="CustomPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomPag__Custo__5629CD9C">
+          <End Role="CustomPageContent" Type="Self.CustomPageContent" Multiplicity="0..1" />
+          <End Role="CustomPageSEOInformation" Type="Self.CustomPageSEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomPageContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomPageSEOInformation">
+              <PropertyRef Name="CustomPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DomainSoc__Domai__656C112C">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="0..1" />
+          <End Role="DomainSocial" Type="Self.DomainSocial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainSocial">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LanguageL__Domai__6B24EA82">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="1" />
+          <End Role="LanguageList" Type="Self.LanguageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LanguageList">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MailList__Domain__68487DD7">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="0..1" />
+          <End Role="MailList" Type="Self.MailList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MailList">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Navigatio__Domai__628FA481">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="0..1" />
+          <End Role="NavigationEditor" Type="Self.NavigationEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavigationEditor">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SEOInform__Domai__571DF1D5">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="0..1" />
+          <End Role="SEOInformation" Type="Self.SEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEOInformation">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BlogApplicationModelStoreContainer">
+          <EntitySet Name="BlogContent" EntityType="Self.BlogContent" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="BlogReview" EntityType="Self.BlogReview" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="BlogSEOInformation" EntityType="Self.BlogSEOInformation" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="BlogTag" EntityType="Self.BlogTag" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="CustomPageContent" EntityType="Self.CustomPageContent" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="CustomPageSEOInformation" EntityType="Self.CustomPageSEOInformation" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="Blog" store:Type="Tables" />
+          <EntitySet Name="Code" EntityType="Self.Code" Schema="General" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="General" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="General" store:Type="Tables" />
+          <EntitySet Name="Domain" EntityType="Self.Domain" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="DomainSocial" EntityType="Self.DomainSocial" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="LanguageList" EntityType="Self.LanguageList" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="MailList" EntityType="Self.MailList" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="NavigationEditor" EntityType="Self.NavigationEditor" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="SEOInformation" EntityType="Self.SEOInformation" Schema="MainSystem" store:Type="Tables" />
+          <EntitySet Name="BlogTranslation" EntityType="Self.BlogTranslation" Schema="Translation" store:Type="Tables" />
+          <EntitySet Name="CategoryTranslation" EntityType="Self.CategoryTranslation" Schema="Translation" store:Type="Tables" />
+          <EntitySet Name="Common" EntityType="Self.Common" Schema="Translation" store:Type="Tables" />
+          <EntitySet Name="CustomPageTranslation" EntityType="Self.CustomPageTranslation" Schema="Translation" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="Visa" store:Type="Tables" />
+          <AssociationSet Name="FK__BlogConte__Categ__276EDEB3" Association="Self.FK__BlogConte__Categ__276EDEB3">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="BlogContent" EntitySet="BlogContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogRevie__BlogI__5FB337D6" Association="Self.FK__BlogRevie__BlogI__5FB337D6">
+            <End Role="BlogContent" EntitySet="BlogContent" />
+            <End Role="BlogReview" EntitySet="BlogReview" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogSEOIn__BlogI__534D60F1" Association="Self.FK__BlogSEOIn__BlogI__534D60F1">
+            <End Role="BlogContent" EntitySet="BlogContent" />
+            <End Role="BlogSEOInformation" EntitySet="BlogSEOInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogTag__BlogID__3D5E1FD2" Association="Self.FK__BlogTag__BlogID__3D5E1FD2">
+            <End Role="BlogContent" EntitySet="BlogContent" />
+            <End Role="BlogTag" EntitySet="BlogTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogTag__TagID__3E52440B" Association="Self.FK__BlogTag__TagID__3E52440B">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="BlogTag" EntitySet="BlogTag" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogTrans__BlogI__2E1BDC42" Association="Self.FK__BlogTrans__BlogI__2E1BDC42">
+            <End Role="BlogContent" EntitySet="BlogContent" />
+            <End Role="BlogTranslation" EntitySet="BlogTranslation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryT__Categ__2B3F6F97" Association="Self.FK__CategoryT__Categ__2B3F6F97">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="CategoryTranslation" EntitySet="CategoryTranslation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomPag__Custo__5070F446" Association="Self.FK__CustomPag__Custo__5070F446">
+            <End Role="CustomPageContent" EntitySet="CustomPageContent" />
+            <End Role="CustomPageTranslation" EntitySet="CustomPageTranslation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomPag__Custo__5629CD9C" Association="Self.FK__CustomPag__Custo__5629CD9C">
+            <End Role="CustomPageContent" EntitySet="CustomPageContent" />
+            <End Role="CustomPageSEOInformation" EntitySet="CustomPageSEOInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DomainSoc__Domai__656C112C" Association="Self.FK__DomainSoc__Domai__656C112C">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="DomainSocial" EntitySet="DomainSocial" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LanguageL__Domai__6B24EA82" Association="Self.FK__LanguageL__Domai__6B24EA82">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="LanguageList" EntitySet="LanguageList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MailList__Domain__68487DD7" Association="Self.FK__MailList__Domain__68487DD7">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="MailList" EntitySet="MailList" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Navigatio__Domai__628FA481" Association="Self.FK__Navigatio__Domai__628FA481">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="NavigationEditor" EntitySet="NavigationEditor" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SEOInform__Domai__571DF1D5" Association="Self.FK__SEOInform__Domai__571DF1D5">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="SEOInformation" EntitySet="SEOInformation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BlogApplicationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BlogContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CoverImgName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HtmlContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="Int64" />
+          <Property Name="BlogStatus" Type="Byte" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="BlogAbstract" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PublishDate" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__BlogConte__Categ__276EDEB3" FromRole="BlogContent" ToRole="Category" />
+          <NavigationProperty Name="BlogSEOInformations" Relationship="Self.FK__BlogSEOIn__BlogI__534D60F1" FromRole="BlogContent" ToRole="BlogSEOInformation" />
+          <NavigationProperty Name="BlogTranslations" Relationship="Self.FK__BlogTrans__BlogI__2E1BDC42" FromRole="BlogContent" ToRole="BlogTranslation" />
+          <NavigationProperty Name="Tags" Relationship="Self.BlogTag" FromRole="BlogContent" ToRole="Tag" />
+          <NavigationProperty Name="BlogReviews" Relationship="BlogApplicationModel.FK__BlogRevie__BlogI__5FB337D6" FromRole="BlogContent" ToRole="BlogReview" />
+        </EntityType>
+        <EntityType Name="BlogSEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int64" />
+          <Property Name="LanguageID" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Keyword" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <NavigationProperty Name="BlogContent" Relationship="Self.FK__BlogSEOIn__BlogI__534D60F1" FromRole="BlogSEOInformation" ToRole="BlogContent" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ImgName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="DomainID" Type="Int64" />
+          <NavigationProperty Name="BlogContents" Relationship="Self.FK__BlogConte__Categ__276EDEB3" FromRole="Category" ToRole="BlogContent" />
+          <NavigationProperty Name="CategoryTranslations" Relationship="Self.FK__CategoryT__Categ__2B3F6F97" FromRole="Category" ToRole="CategoryTranslation" />
+        </EntityType>
+        <EntityType Name="CustomPageContent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomPageUrl" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="HtmlContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CustomPageTranslations" Relationship="Self.FK__CustomPag__Custo__5070F446" FromRole="CustomPageContent" ToRole="CustomPageTranslation" />
+          <NavigationProperty Name="CustomPageSEOInformations" Relationship="Self.FK__CustomPag__Custo__5629CD9C" FromRole="CustomPageContent" ToRole="CustomPageSEOInformation" />
+        </EntityType>
+        <EntityType Name="CustomPageSEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomPageID" Type="Int64" />
+          <Property Name="LanguageID" Type="Int64" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Keyword" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <NavigationProperty Name="CustomPageContent" Relationship="Self.FK__CustomPag__Custo__5629CD9C" FromRole="CustomPageSEOInformation" ToRole="CustomPageContent" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="DomainID" Type="Int64" />
+          <NavigationProperty Name="BlogContents" Relationship="Self.BlogTag" FromRole="Tag" ToRole="BlogContent" />
+        </EntityType>
+        <EntityType Name="Code">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="Byte" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="7" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="UserID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CodeISO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CodeISO_3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LogContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DomainName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="DomainUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DomainImgName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SmtpHost" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SmtpPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SmtpPort" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EnableSSL" Type="Boolean" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="Int64" />
+          <Property Name="UpdatedUser" Type="Int64" />
+          <Property Name="DefaultLanguage" Type="Int64" />
+          <Property Name="AdminEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdminUsername" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="ConsoleDomainUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DisqusUserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FavIcon" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CDNUrl" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FTPUsername" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FTPPassword" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SEOInformations" Relationship="Self.FK__SEOInform__Domai__571DF1D5" FromRole="Domain" ToRole="SEOInformation" />
+          <Property Name="GoogleAnalyticsID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="FacebookAppID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterUserName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="NavigationEditors" Relationship="BlogApplicationModel.FK__Navigatio__Domai__628FA481" FromRole="Domain" ToRole="NavigationEditor" />
+          <NavigationProperty Name="DomainSocials" Relationship="BlogApplicationModel.FK__DomainSoc__Domai__656C112C" FromRole="Domain" ToRole="DomainSocial" />
+          <NavigationProperty Name="MailLists" Relationship="BlogApplicationModel.FK__MailList__Domain__68487DD7" FromRole="Domain" ToRole="MailList" />
+          <NavigationProperty Name="LanguageLists" Relationship="BlogApplicationModel.FK__LanguageL__Domai__6B24EA82" FromRole="Domain" ToRole="LanguageList" />
+        </EntityType>
+        <EntityType Name="SEOInformation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Keyword" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="LanguageID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <NavigationProperty Name="Domain" Relationship="Self.FK__SEOInform__Domai__571DF1D5" FromRole="SEOInformation" ToRole="Domain" />
+          <Property Name="LocationID" Type="Byte" />
+        </EntityType>
+        <EntityType Name="BlogTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="BlogID" Type="Int64" Nullable="false" />
+          <Property Name="LanguageID" Type="Int64" Nullable="false" />
+          <Property Name="TranslationHtml" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="AbstractTranslation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="BlogContent" Relationship="Self.FK__BlogTrans__BlogI__2E1BDC42" FromRole="BlogTranslation" ToRole="BlogContent" />
+        </EntityType>
+        <EntityType Name="CategoryTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int64" Nullable="false" />
+          <Property Name="LanguageID" Type="Int64" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__CategoryT__Categ__2B3F6F97" FromRole="CategoryTranslation" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Common">
+          <Key>
+            <PropertyRef Name="Keyword" />
+            <PropertyRef Name="LanguageID" />
+          </Key>
+          <Property Name="Keyword" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LanguageID" Type="Int64" Nullable="false" />
+          <Property Name="Translation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CustomPageTranslation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="CustomPageID" Type="Int64" Nullable="false" />
+          <Property Name="LanguageID" Type="Int64" Nullable="false" />
+          <Property Name="TranslationHtml" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TranslationTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CustomPageContent" Relationship="Self.FK__CustomPag__Custo__5070F446" FromRole="CustomPageTranslation" ToRole="CustomPageContent" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PaswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MainLanguageID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <Property Name="UserType" Type="Byte" />
+          <Property Name="UserProfilePic" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DomainID" Type="Int64" />
+        </EntityType>
+        <Association Name="FK__BlogConte__Categ__276EDEB3">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogContent">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogSEOIn__BlogI__534D60F1">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="0..1" />
+          <End Role="BlogSEOInformation" Type="Self.BlogSEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogSEOInformation">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BlogTrans__BlogI__2E1BDC42">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="1" />
+          <End Role="BlogTranslation" Type="Self.BlogTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogTranslation">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CategoryT__Categ__2B3F6F97">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="CategoryTranslation" Type="Self.CategoryTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CategoryTranslation">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomPag__Custo__5070F446">
+          <End Role="CustomPageContent" Type="Self.CustomPageContent" Multiplicity="1" />
+          <End Role="CustomPageTranslation" Type="Self.CustomPageTranslation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomPageContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomPageTranslation">
+              <PropertyRef Name="CustomPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CustomPag__Custo__5629CD9C">
+          <End Role="CustomPageContent" Type="Self.CustomPageContent" Multiplicity="0..1" />
+          <End Role="CustomPageSEOInformation" Type="Self.CustomPageSEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomPageContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CustomPageSEOInformation">
+              <PropertyRef Name="CustomPageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SEOInform__Domai__571DF1D5">
+          <End Role="Domain" Type="Self.Domain" Multiplicity="0..1" />
+          <End Role="SEOInformation" Type="Self.SEOInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="SEOInformation">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BlogTag">
+          <End Role="BlogContent" Type="Self.BlogContent" Multiplicity="*" />
+          <End Role="Tag" Type="Self.Tag" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="BlogApplicationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BlogContents" EntityType="Self.BlogContent" />
+          <EntitySet Name="BlogSEOInformations" EntityType="Self.BlogSEOInformation" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="CustomPageContents" EntityType="Self.CustomPageContent" />
+          <EntitySet Name="CustomPageSEOInformations" EntityType="Self.CustomPageSEOInformation" />
+          <EntitySet Name="Tags" EntityType="Self.Tag" />
+          <EntitySet Name="Codes" EntityType="Self.Code" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Logs" EntityType="Self.Log" />
+          <EntitySet Name="Domains" EntityType="Self.Domain" />
+          <EntitySet Name="SEOInformations" EntityType="Self.SEOInformation" />
+          <EntitySet Name="BlogTranslations" EntityType="Self.BlogTranslation" />
+          <EntitySet Name="CategoryTranslations" EntityType="Self.CategoryTranslation" />
+          <EntitySet Name="Commons" EntityType="Self.Common" />
+          <EntitySet Name="CustomPageTranslations" EntityType="Self.CustomPageTranslation" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__BlogConte__Categ__276EDEB3" Association="Self.FK__BlogConte__Categ__276EDEB3">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="BlogContent" EntitySet="BlogContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogSEOIn__BlogI__534D60F1" Association="Self.FK__BlogSEOIn__BlogI__534D60F1">
+            <End Role="BlogContent" EntitySet="BlogContents" />
+            <End Role="BlogSEOInformation" EntitySet="BlogSEOInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BlogTrans__BlogI__2E1BDC42" Association="Self.FK__BlogTrans__BlogI__2E1BDC42">
+            <End Role="BlogContent" EntitySet="BlogContents" />
+            <End Role="BlogTranslation" EntitySet="BlogTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CategoryT__Categ__2B3F6F97" Association="Self.FK__CategoryT__Categ__2B3F6F97">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="CategoryTranslation" EntitySet="CategoryTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomPag__Custo__5070F446" Association="Self.FK__CustomPag__Custo__5070F446">
+            <End Role="CustomPageContent" EntitySet="CustomPageContents" />
+            <End Role="CustomPageTranslation" EntitySet="CustomPageTranslations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CustomPag__Custo__5629CD9C" Association="Self.FK__CustomPag__Custo__5629CD9C">
+            <End Role="CustomPageContent" EntitySet="CustomPageContents" />
+            <End Role="CustomPageSEOInformation" EntitySet="CustomPageSEOInformations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SEOInform__Domai__571DF1D5" Association="Self.FK__SEOInform__Domai__571DF1D5">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="SEOInformation" EntitySet="SEOInformations" />
+          </AssociationSet>
+          <AssociationSet Name="BlogTag" Association="Self.BlogTag">
+            <End Role="BlogContent" EntitySet="BlogContents" />
+            <End Role="Tag" EntitySet="Tags" />
+          </AssociationSet>
+          <EntitySet Name="BlogReviews" EntityType="BlogApplicationModel.BlogReview" />
+          <AssociationSet Name="FK__BlogRevie__BlogI__5FB337D6" Association="BlogApplicationModel.FK__BlogRevie__BlogI__5FB337D6">
+            <End Role="BlogContent" EntitySet="BlogContents" />
+            <End Role="BlogReview" EntitySet="BlogReviews" />
+          </AssociationSet>
+          <EntitySet Name="NavigationEditors" EntityType="BlogApplicationModel.NavigationEditor" />
+          <AssociationSet Name="FK__Navigatio__Domai__628FA481" Association="BlogApplicationModel.FK__Navigatio__Domai__628FA481">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="NavigationEditor" EntitySet="NavigationEditors" />
+          </AssociationSet>
+          <EntitySet Name="DomainSocials" EntityType="BlogApplicationModel.DomainSocial" />
+          <AssociationSet Name="FK__DomainSoc__Domai__656C112C" Association="BlogApplicationModel.FK__DomainSoc__Domai__656C112C">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="DomainSocial" EntitySet="DomainSocials" />
+          </AssociationSet>
+          <EntitySet Name="MailLists" EntityType="BlogApplicationModel.MailList" />
+          <AssociationSet Name="FK__MailList__Domain__68487DD7" Association="BlogApplicationModel.FK__MailList__Domain__68487DD7">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="MailList" EntitySet="MailLists" />
+          </AssociationSet>
+          <EntitySet Name="LanguageLists" EntityType="BlogApplicationModel.LanguageList" />
+          <AssociationSet Name="FK__LanguageL__Domai__6B24EA82" Association="BlogApplicationModel.FK__LanguageL__Domai__6B24EA82">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="LanguageList" EntitySet="LanguageLists" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BlogReview">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int64" />
+          <Property Name="ReviewMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedUser" Type="Int64" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="7" />
+          <Property Name="UpdatedUser" Type="Int64" />
+          <NavigationProperty Name="BlogContent" Relationship="BlogApplicationModel.FK__BlogRevie__BlogI__5FB337D6" FromRole="BlogReview" ToRole="BlogContent" />
+        </EntityType>
+        <Association Name="FK__BlogRevie__BlogI__5FB337D6">
+          <End Type="BlogApplicationModel.BlogContent" Role="BlogContent" Multiplicity="0..1" />
+          <End Type="BlogApplicationModel.BlogReview" Role="BlogReview" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BlogContent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BlogReview">
+              <PropertyRef Name="BlogID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NavigationEditor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EditorLocation" Type="Byte" />
+          <Property Name="EditorData" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DomainID" Type="Int64" />
+          <NavigationProperty Name="Domain" Relationship="BlogApplicationModel.FK__Navigatio__Domai__628FA481" FromRole="NavigationEditor" ToRole="Domain" />
+        </EntityType>
+        <Association Name="FK__Navigatio__Domai__628FA481">
+          <End Type="BlogApplicationModel.Domain" Role="Domain" Multiplicity="0..1" />
+          <End Type="BlogApplicationModel.NavigationEditor" Role="NavigationEditor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="NavigationEditor">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DomainSocial">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SocialMediaType" Type="Byte" />
+          <Property Name="SocialMediaUrl" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SocialMediaPitch" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="DomainID" Type="Int64" />
+          <Property Name="StatusID" Type="Byte" />
+          <NavigationProperty Name="Domain" Relationship="BlogApplicationModel.FK__DomainSoc__Domai__656C112C" FromRole="DomainSocial" ToRole="Domain" />
+        </EntityType>
+        <Association Name="FK__DomainSoc__Domai__656C112C">
+          <End Type="BlogApplicationModel.Domain" Role="Domain" Multiplicity="0..1" />
+          <End Type="BlogApplicationModel.DomainSocial" Role="DomainSocial" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="DomainSocial">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MailList">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DomainID" Type="Int64" />
+          <NavigationProperty Name="Domain" Relationship="BlogApplicationModel.FK__MailList__Domain__68487DD7" FromRole="MailList" ToRole="Domain" />
+        </EntityType>
+        <Association Name="FK__MailList__Domain__68487DD7">
+          <End Type="BlogApplicationModel.Domain" Role="Domain" Multiplicity="0..1" />
+          <End Type="BlogApplicationModel.MailList" Role="MailList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MailList">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="LanguageList">
+          <Key>
+            <PropertyRef Name="LanguageID" />
+            <PropertyRef Name="DomainID" />
+          </Key>
+          <Property Name="LanguageID" Type="Int64" Nullable="false" />
+          <Property Name="DomainID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Domain" Relationship="BlogApplicationModel.FK__LanguageL__Domai__6B24EA82" FromRole="LanguageList" ToRole="Domain" />
+        </EntityType>
+        <Association Name="FK__LanguageL__Domai__6B24EA82">
+          <End Type="BlogApplicationModel.Domain" Role="Domain" Multiplicity="1" />
+          <End Type="BlogApplicationModel.LanguageList" Role="LanguageList" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="LanguageList">
+              <PropertyRef Name="DomainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BlogApplicationModelStoreContainer" CdmEntityContainer="BlogApplicationEntities">
+          <EntitySetMapping Name="BlogContents">
+            <EntityTypeMapping TypeName="BlogApplicationModel.BlogContent">
+              <MappingFragment StoreEntitySet="BlogContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CoverImgName" ColumnName="CoverImgName" />
+                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="BlogStatus" ColumnName="BlogStatus" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="BlogAbstract" ColumnName="BlogAbstract" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogSEOInformations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.BlogSEOInformation">
+              <MappingFragment StoreEntitySet="BlogSEOInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImgName" ColumnName="ImgName" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomPageContents">
+            <EntityTypeMapping TypeName="BlogApplicationModel.CustomPageContent">
+              <MappingFragment StoreEntitySet="CustomPageContent">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomPageUrl" ColumnName="CustomPageUrl" />
+                <ScalarProperty Name="HtmlContent" ColumnName="HtmlContent" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomPageSEOInformations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.CustomPageSEOInformation">
+              <MappingFragment StoreEntitySet="CustomPageSEOInformation">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CustomPageID" ColumnName="CustomPageID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Codes">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Code">
+              <MappingFragment StoreEntitySet="Code">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Code1" ColumnName="Code" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CodeISO" ColumnName="CodeISO" />
+                <ScalarProperty Name="CodeISO_3" ColumnName="CodeISO_3" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Logs">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LogContent" ColumnName="LogContent" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domains">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Domain">
+              <MappingFragment StoreEntitySet="Domain">
+                <ScalarProperty Name="TwitterUserName" ColumnName="TwitterUserName" />
+                <ScalarProperty Name="FacebookAppID" ColumnName="FacebookAppID" />
+                <ScalarProperty Name="GoogleAnalyticsID" ColumnName="GoogleAnalyticsID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="DomainName" ColumnName="DomainName" />
+                <ScalarProperty Name="DomainUrl" ColumnName="DomainUrl" />
+                <ScalarProperty Name="DomainImgName" ColumnName="DomainImgName" />
+                <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+                <ScalarProperty Name="SmtpPassword" ColumnName="SmtpPassword" />
+                <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="EnableSSL" ColumnName="EnableSSL" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="DefaultLanguage" ColumnName="DefaultLanguage" />
+                <ScalarProperty Name="AdminEmail" ColumnName="AdminEmail" />
+                <ScalarProperty Name="AdminUsername" ColumnName="AdminUsername" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+                <ScalarProperty Name="ConsoleDomainUrl" ColumnName="ConsoleDomainUrl" />
+                <ScalarProperty Name="DisqusUserName" ColumnName="DisqusUserName" />
+                <ScalarProperty Name="FavIcon" ColumnName="FavIcon" />
+                <ScalarProperty Name="CDNUrl" ColumnName="CDNUrl" />
+                <ScalarProperty Name="FTPUsername" ColumnName="FTPUsername" />
+                <ScalarProperty Name="FTPPassword" ColumnName="FTPPassword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEOInformations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.SEOInformation">
+              <MappingFragment StoreEntitySet="SEOInformation">
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogTranslations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.BlogTranslation">
+              <MappingFragment StoreEntitySet="BlogTranslation">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="TranslationHtml" ColumnName="TranslationHtml" />
+                <ScalarProperty Name="AbstractTranslation" ColumnName="AbstractTranslation" />
+                <ScalarProperty Name="TranslationTitle" ColumnName="TranslationTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoryTranslations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.CategoryTranslation">
+              <MappingFragment StoreEntitySet="CategoryTranslation">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Commons">
+            <EntityTypeMapping TypeName="BlogApplicationModel.Common">
+              <MappingFragment StoreEntitySet="Common">
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Translation" ColumnName="Translation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomPageTranslations">
+            <EntityTypeMapping TypeName="BlogApplicationModel.CustomPageTranslation">
+              <MappingFragment StoreEntitySet="CustomPageTranslation">
+                <ScalarProperty Name="CustomPageID" ColumnName="CustomPageID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="TranslationHtml" ColumnName="TranslationHtml" />
+                <ScalarProperty Name="TranslationTitle" ColumnName="TranslationTitle" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BlogApplicationModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PaswordSalt" ColumnName="PaswordSalt" />
+                <ScalarProperty Name="MainLanguageID" ColumnName="MainLanguageID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserProfilePic" ColumnName="UserProfilePic" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="BlogTag" TypeName="BlogApplicationModel.BlogTag" StoreEntitySet="BlogTag">
+            <EndProperty Name="BlogContent">
+              <ScalarProperty Name="ID" ColumnName="BlogID" />
+            </EndProperty>
+            <EndProperty Name="Tag">
+              <ScalarProperty Name="ID" ColumnName="TagID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="BlogReviews">
+            <EntityTypeMapping TypeName="BlogApplicationModel.BlogReview">
+              <MappingFragment StoreEntitySet="BlogReview">
+                <ScalarProperty Name="UpdatedUser" ColumnName="UpdatedUser" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedUser" ColumnName="CreatedUser" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ReviewMessage" ColumnName="ReviewMessage" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NavigationEditors">
+            <EntityTypeMapping TypeName="BlogApplicationModel.NavigationEditor">
+              <MappingFragment StoreEntitySet="NavigationEditor">
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="EditorData" ColumnName="EditorData" />
+                <ScalarProperty Name="EditorLocation" ColumnName="EditorLocation" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DomainSocials">
+            <EntityTypeMapping TypeName="BlogApplicationModel.DomainSocial">
+              <MappingFragment StoreEntitySet="DomainSocial">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="SocialMediaPitch" ColumnName="SocialMediaPitch" />
+                <ScalarProperty Name="SocialMediaUrl" ColumnName="SocialMediaUrl" />
+                <ScalarProperty Name="SocialMediaType" ColumnName="SocialMediaType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MailLists">
+            <EntityTypeMapping TypeName="BlogApplicationModel.MailList">
+              <MappingFragment StoreEntitySet="MailList">
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LanguageLists">
+            <EntityTypeMapping TypeName="BlogApplicationModel.LanguageList">
+              <MappingFragment StoreEntitySet="LanguageList">
+                <ScalarProperty Name="DomainID" ColumnName="DomainID" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

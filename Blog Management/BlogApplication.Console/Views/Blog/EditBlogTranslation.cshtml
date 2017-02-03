@@ -1,0 +1,370 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.EnumExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Translation.BlogTranslation
+
+@{
+    ViewBag.Title = (Model.LanguageID == 0 ? Html.GetWord("Create Blog Translation") : Html.GetWord("Edit Blog Translation"));
+}
+
+<!--FROALA-->
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/froala_editor.min.css" />
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/froala_style.min.css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/colors.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/char_counter.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/code_view.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/emoticons.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/file.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/fullscreen.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/image.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/image_manager.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/line_breaker.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/table.min.css">
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/plugins/video.min.css">
+
+<style>
+    .map_plugin_layer {
+        width: 300px;
+        max-height: 250px;
+        overflow: scroll;
+    }
+</style>
+
+
+
+<h2>@( Model.LanguageID == 0 ? Html.GetWord("Create Blog Translation") : Html.GetWord("Edit Blog Translation")) </h2>
+<input type='hidden' id='ViewMessages' />
+
+<div class="panel panel default">
+    <div class="panel-body">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#home" data-toggle="tab">@Html.GetWord("Main")</a>
+            </li>
+            <li>
+                <a href="#preview" data-toggle="tab">@Html.GetWord("Preview")</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="home">
+                @using (Html.BeginForm("EditBlogTranslation", "Blog", FormMethod.Post, new { @class = "form-horizontal", @id = "EditBlogTranslation" }))
+                {
+                    @Html.HiddenFor(model => model.BlogID)
+                    @Html.HiddenFor(model => model.ID)
+                    <input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0" />
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4">@Html.GetWord("Blog")</label>
+                        <div class="col-lg-4">
+                            <input value="@Model.BlogContent.Name" type="text" readonly="readonly" class="form-control" />
+                        </div>
+                    </div>
+                    if (Model.LanguageID == 0)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">@Html.GetWord("Select Language")</label>
+                            <div class="col-lg-4">
+                                @Html.LanguageDropDownList("LanguageID", new { @placeholder = Html.GetWord("Please Select Language"), @class = "form-control" })
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.HiddenFor(model => model.LanguageID)
+                        <div class="form-group">
+                            <label class="control-label col-lg-4">@Html.GetWord("Language")</label>
+                            <div class="col-lg-4">
+                                <input value="@Html.GetLanguageName(Model.LanguageID)" type="text" readonly="readonly" class="form-control" />
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4">@Html.GetWord("Blog Translation Title")</label>
+                        <div class="col-lg-4">
+                            @Html.TextAreaFor(model => model.TranslationTitle, new { @placeholder = Html.GetWord("Please Write Title "), @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-4">@Html.GetWord("Blog Translation Abstract")</label>
+                        <div class="col-lg-4">
+                            @Html.TextAreaFor(model => model.AbstractTranslation, new { @placeholder = Html.GetWord("Please Write Abstract Translation"), @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-lg-12">@Html.GetWord("Blog Translation")</label>
+                        <div class="container">
+                            @Html.TextAreaFor(model => model.TranslationText, new { @class = "form-control" , @id= "EditTranslationContent"})
+                        </div>
+                    </div>
+
+                    <div class="form-actions no-margin-bottom" style="text-align: center;">
+                        <input type="submit" value="@(Model.LanguageID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg " />
+                    </div>
+                }
+            </div>
+
+            <div id="preview" class="tab-pane fade">
+                <div class="container">
+                    <div class="row">
+                        <div class="box" style=" margin-bottom: 20px;padding: 30px 15px;background: #fff;background: rgba(255,255,255,0.9);">
+                            <div class="col-lg-12">
+                                <div class="col-lg-12 fr-view fr-preview">
+                                    @Html.Raw(Model.TranslationTextDecoded)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    @Html.ShowMessages()
+    <script>
+        @if (Model.LanguageID == 0)
+        {
+            <text> $("#LanguageID").chosen(); </text>
+        }
+
+        $('#EditBlogTranslation').validate({
+            rules: {
+                EditTranslationContent: "required",
+                TranslationTitle: "required",
+                AbstractTranslation : "required"
+            },
+            messages:
+            {
+                EditTranslationContent: '@Html.GetWord("Required")',
+                TranslationTitle: '@Html.GetWord("Required")',
+                AbstractTranslation: '@Html.GetWord("Required")'
+            },
+            errorClass:
+                'help-block',
+            errorElement:
+                'span',
+            highlight:
+                function (element, errorClass, validClass) {
+                    $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+                },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+    </script>
+
+    <script>
+        function AddThisAddress(counter) {
+            var src = $("#location_" + counter).find('iframe').attr('src');
+            $("#EditTranslationContent").froalaEditor('video.insert',
+                '<iframe width="50%" height="450" frameborder="0" style="border:0" src="' + src + '" allowfullscreen></iframe>');
+        }
+
+        function getMapInfo() {
+            if ($("#google_map_loc").val() != "") {
+                $("#popUpMessage").remove();
+                $.ajax({
+                    method: "GET",
+                    url: "/Ajax/GetMapInfo",
+                    data: { text: $("#google_map_loc").val() },
+                    dataType: "json",
+                    success: function (request) {
+                        var obj = jQuery.parseJSON(request);
+                        $("#popUpMessage").remove();
+                        $(".location").remove();
+                        if (obj.results.length == 0)
+                            $(".map_plugin_layer > div").append("<div class='col-lg-8 col-lg-offset-2' style='color:red;margin-bottom:15px;' id='popUpMessage'>" + '@Html.GetWord("Please be more specific")' + "</div>");
+                        var counter = 0;
+
+                        while (obj.results.length > 0 && (counter != obj.results.length && counter != 5)) {
+                            $(".map_plugin_layer > div").append('<hr/> <div class="location col-lg-12" id="location_' + counter + '"><label style="float:left;margin-bottom:15px" class="label label-primary">' + obj.results[counter].name + '</label><label style="float:left;margin-bottom:15px" ' +
+                                'class="label label-info">' +
+                                obj.results[counter].formatted_address + '</label><iframe width="250" height="200" frameborder="0" style="border:0" ' +
+                                'src="https://www.google.com/maps/embed/v1/place?' +
+                                'q=place_id:' + obj.results[counter].place_id + '&key=AIzaSyAbuGHGdxu-YYxElcm5V2di1Cu7fllmwGg' +
+                                '" allowfullscreen></iframe><div onclick="AddThisAddress(' + counter + ')" class="btn btn-default" style="margin-top:15px;">' + "@Html.GetWord("Add this Address")" + '</div></div>');
+                            counter++;
+                        }
+                    }
+                });
+            } else {
+                if (!$("#popUpMessage").length)
+                    $(".map_plugin_layer > div").append("<div class='col-lg-8 col-lg-offset-2' style='color:red;margin-bottom:15px;' id='popUpMessage'>" + '@Html.GetWord("Please fill it")' + "</div>");
+            }
+        }
+    </script>
+
+    <!--FROALA-->
+    <script src="~/Files/Plugins/frola/js/froala_editor.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/block_styles.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/char_counter.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/code_view.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/colors.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/emoticons.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/entities.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/file.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/font_family.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/font_size.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/fullscreen.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/image.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/image_manager.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/inline_style.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/line_breaker.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/link.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/lists.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/paragraph_format.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/paragraph_style.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/table.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/save.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/url.min.js"></script>
+    <script src="~/Files/Plugins/frola/js/plugins/video.min.js"></script>
+
+    <script>
+
+        $.extend($.FroalaEditor.POPUP_TEMPLATES, {
+            "myMapPlugin.popup": '[_BUTTONS_][_CUSTOM_LAYER_]'
+        });
+
+        $.extend($.FroalaEditor.DEFAULTS, {
+            popupButtons: ['popupClose']
+        });
+
+        // The custom popup is defined inside a plugin (new or existing).
+        $.FroalaEditor.PLUGINS.myMapPlugin = function (editor) {
+            // Create custom popup.
+            function initPopup() {
+                // Popup buttons.
+                var popup_buttons = '';
+
+                // Create the list of buttons.
+                if (editor.opts.popupButtons.length > 1) {
+                    popup_buttons += '<div class="fr-buttons">';
+                    popup_buttons += editor.button.buildList(editor.opts.popupButtons);
+                    popup_buttons += '</div>';
+                }
+
+                // Load popup template.
+                var template = {
+                    buttons: popup_buttons,
+                    custom_layer: '<div class="map_plugin_layer"><div class="col-lg-12">' +
+                        '<input type="text" style="margin-top:15px;" class="form-control" id="google_map_loc" name="google_map_loc" placeholder="@Html.GetWord("Location")"/> ' +
+                        '<input type="button" onclick="getMapInfo()" style="margin-top:15px;margin-bottom:15px;" class="btn btn-primary btn-lg " value="@Html.GetWord("Search Location")"/></div></div>'
+                };
+
+                // Create popup.
+                var $popup = editor.popups.create('myMapPlugin.popup', template);
+
+                return $popup;
+            }
+
+            // Show the popup
+            function showPopup() {
+                // Get the popup object defined above.
+                var $popup = editor.popups.get('myMapPlugin.popup');
+
+
+                if (!$popup) $popup = initPopup();
+                // Set the editor toolbar as the popup's container.
+                editor.popups.setContainer('myMapPlugin.popup', editor.$tb);
+
+                // This will trigger the refresh event assigned to the popup.
+                // editor.popups.refresh('customPlugin.popup');
+
+                // This custom popup is opened by pressing a button from the editor's toolbar.
+                // Get the button's object in order to place the popup relative to it.
+                var $btn = editor.$tb.find('.fr-command[data-cmd="insert_map"]');
+
+                // Set the popup's position.
+                var left = $btn.offset().left + $btn.outerWidth() / 2;
+                var top = $btn.offset().top + (editor.opts.toolbarBottom ? 10 : $btn.outerHeight() - 10);
+
+                // Show the custom popup.
+                // The button's outerHeight is required in case the popup needs to be displayed above it.
+                editor.popups.show('myMapPlugin.popup', left, top, $btn.outerHeight());
+            }
+
+            // Hide the custom popup.
+            function hidePopup() {
+                editor.popups.hide('myMapPlugin.popup');
+            }
+
+            // Methods visible outside the plugin.
+            return {
+                showPopup: showPopup,
+                hidePopup: hidePopup
+            }
+        }
+
+        $.FroalaEditor.DefineIcon('insert_map', { NAME: 'map' });
+        $.FroalaEditor.RegisterCommand('insert_map', {
+            title: 'Insert Map',
+            focus: true,
+            undo: true,
+            refreshAfterCallback: true,
+            callback: function () {
+                this.myMapPlugin.showPopup();
+            }
+        });
+
+        $.FroalaEditor.DefineIcon('popupClose', { NAME: 'times' });
+        $.FroalaEditor.RegisterCommand('popupClose', {
+            title: 'Close',
+            undo: false,
+            focus: false,
+            callback: function () {
+                this.myMapPlugin.hidePopup();
+            }
+        });
+
+
+        $("#EditTranslationContent").froalaEditor({
+            enter: $.FroalaEditor.ENTER_DIV,
+            heightMin: 750,
+            heightMax: 750,
+            placeholderText: '@Html.GetWord("Start Typing Something")',
+            htmlRemoveTags: [],
+            toolbarButtons: [
+                'fullscreen', 'color', 'bold', 'italic', 'underline',
+                'strikeThrough', 'fontFamily', 'fontSize', '|', 'inlineStyle', 'paragraphStyle',
+                '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent',
+                'quote', 'insertHR', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertTable',
+                'undo', 'redo', 'clearFormatting', 'selectAll', 'html', 'insert_map'
+            ],
+            colorsBackground: [
+                '#61BD6D', '#1ABC9C', '#54ACD2', '#2C82C9', '#9365B8', '#475577', '#CCCCCC',
+                '#41A85F', '#00A885', '#3D8EB9', '#2969B0', '#553982', '#28324E', '#000000',
+                '#F7DA64', '#FBA026', '#EB6B56', '#E25041', '#A38F84', '#EFEFEF', '#FFFFFF',
+                '#FAC51C', '#F37934', '#D14841', '#B8312F', '#7C706B', '#D1D5D8', 'REMOVE'
+            ],
+            colorsText: [
+                '#61BD6D', '#1ABC9C', '#54ACD2', '#2C82C9', '#9365B8', '#475577', '#CCCCCC',
+                '#41A85F', '#00A885', '#3D8EB9', '#2969B0', '#553982', '#28324E', '#000000',
+                '#F7DA64', '#FBA026', '#EB6B56', '#E25041', '#A38F84', '#EFEFEF', '#FFFFFF',
+                '#FAC51C', '#F37934', '#D14841', '#B8312F', '#7C706B', '#D1D5D8', 'REMOVE'
+            ],
+            colorsStep: 14,
+            toolbarSticky: false,
+            // Set the image upload parameter.
+            imageUploadParam: 'image_param',
+            // Set the image upload URL.
+            imageUploadURL: '@Url.Action("UploadImage", "Ajax")',
+            // Additional upload params.
+            imageUploadParams: { id: 'my_editor' },
+            // Set request type.
+            imageUploadMethod: 'POST',
+            // Set max image size to 5MB.
+            imageMaxSize: 5 * 1024 * 1024,
+            // Allow to upload PNG and JPG.
+            imageAllowedTypes: ['jpeg', 'jpg', 'png']
+        }).on("froalaEditor.contentChanged", function (e, editor) {
+            $(".fr-preview").html(editor.html.get());
+        });
+    </script>
+}

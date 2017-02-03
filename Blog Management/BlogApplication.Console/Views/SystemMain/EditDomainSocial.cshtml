@@ -1,0 +1,69 @@
+﻿
+@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.EnumExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.MainSystem.DomainSocial
+
+@{
+    ViewBag.Title = (Model.ID == 0 ? Html.GetWord("Create Domain Social") : Html.GetWord("Edit Domain Social"));
+}
+
+<h2>@( Model.ID == 0 ? Html.GetWord("Create Domain Social") : Html.GetWord("Edit Domain Social")) </h2>
+<input type='hidden' id='ViewMessages' />
+@using (Html.BeginForm("EditDomainSocial", "SystemMain", FormMethod.Post, new { @class = "form-horizontal", @id = "EditDomainSocial" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.DomainID)
+    <input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0" />
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Social Media Type")</label>
+        <div class="col-lg-4">
+            @Html.TranslatedDropDownList("SocialMediaType", Model.SocialMediaType != null ? Model.SocialMediaType : 0, typeof(SocialTypes), false, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Social URL")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.SocialMediaUrl, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Pitch")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.SocialMediaPitch, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Status")</label>
+        <div class="checkbox anim-checkbox ">
+            <input type="checkbox" id="StatusID" name="StatusID" @(Model.StatusID == VariableValue.ConvertStatusTypesByte(StatusType.Active) ? "checked ='checked'" : "" ) />
+            <label class="control-label col-lg-4 emptyLabel" for="StatusID"></label>
+        </div>
+    </div>
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@(Model.ID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg " />
+        @if (Model.ID > 0)
+        {
+            <input type="button" value="@Html.GetWord("Delete")" id="DeleteDomainSocial" class="btn btn-primary btn-lg " />
+        }
+    </div>
+}
+
+@section scripts{
+
+    @Html.ShowMessages()
+    <script>
+        $("#DeleteDomainSocial").click(function () {
+            $("#DeleteInfo").val(1);
+            $("form").submit();
+        });
+
+        
+    </script>
+}

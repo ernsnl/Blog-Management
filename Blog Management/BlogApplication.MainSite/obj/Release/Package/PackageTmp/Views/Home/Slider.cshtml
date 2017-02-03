@@ -1,0 +1,78 @@
+﻿@using BlogApplication.Framework.Extensions.StringExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Blog.BlogContent>
+
+@{
+    int counter = 0;
+}
+
+
+@if (Model.Data != null && Model.Data.Count > 1)
+{
+    <div class="row">
+        <div class="box">
+            <div class="col-lg-12 text-center">
+                <div id="carousel-example-generic" class="carousel slide" style="width: 75%; margin-left: 12.5%">
+                    <ol class="carousel-indicators hidden-xs" style="bottom:0">
+                        @foreach (var blog in Model.Data)
+                        {
+                            <li data-target="#carousel-example-generic" data-slide-to="@counter" class="@(counter == 0 ? "active" : "")"></li>
+                            counter++;
+                        }
+
+                    </ol>
+                    <div class="carousel-inner blogSlider">
+                        @foreach (var blog in Model.Data)
+                        {
+
+                            <div class="item @(counter%3 == 0 ? "active" : "")" data-url="">
+                                <img class="img-responsive img-full img-slider" data-src="@Html.GetCDNUrl("Blog")@(blog.CoverImgName.Split('.')[0]+ "__m" + "." + blog.CoverImgName.Split('.')[1])" class="lazy img-responsive img-border img-half" src="@Html.GetCDNUrl("Blog")@(blog.CoverImgName.Split('.')[0]+ "__s" + "." + blog.CoverImgName.Split('.')[1])">
+                                <div class="carousel-caption">
+                                    <a class="sliderHeader" href="@Url.RouteUrl("ViewNews", new
+                                 {
+                                     @id = blog.ID, @name = (blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any() ?
+                                         blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle.ReplaceTurkishCharactes().RemoveSpace() : blog.Name.ReplaceTurkishCharactes().RemoveSpace())
+                                 })">
+                                        @if (blog.BlogTranslations.Count > 0 && blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                                        {
+                                            if (!string.IsNullOrEmpty(blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle))
+                                            {
+                                                @blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle
+                                            }
+                                            else
+                                            {
+                                                @blog.Name
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @blog.Name
+                                        }
+                                    </a>
+                                </div>
+                            </div>
+
+                            counter++;
+                        }
+                    </div>
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                        <span class="icon-prev"></span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                        <span class="icon-next"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts{
+        <script>
+            $('.carousel').carousel({
+                interval: 5000 //changes the speed
+            });
+        </script>
+    }
+
+}

@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3CE95176-1B18-42FC-9068-988CD6D2D4AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlogApplication.BusinessLayer</RootNamespace>
+    <AssemblyName>BlogApplication.BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\Blog\BlogFacade.cs" />
+    <Compile Include="Controller\Blog\CategoryFacade.cs" />
+    <Compile Include="Controller\Blog\CustomPageFacade.cs" />
+    <Compile Include="Controller\Blog\Facade.cs" />
+    <Compile Include="Controller\Blog\TagFacade.cs" />
+    <Compile Include="Controller\Cache\Blog\CategoryCache.cs" />
+    <Compile Include="Controller\Cache\Blog\Facade.cs" />
+    <Compile Include="Controller\Cache\Blog\TagCache.cs" />
+    <Compile Include="Controller\Cache\CacheFacade.cs" />
+    <Compile Include="Controller\Cache\Facade.cs" />
+    <Compile Include="Controller\Cache\General\Facade.cs" />
+    <Compile Include="Controller\Cache\General\LanguageCache.cs" />
+    <Compile Include="Controller\Cache\Translation\Facade.cs" />
+    <Compile Include="Controller\Cache\Translation\TranslationCache.cs" />
+    <Compile Include="Controller\ControllerFacade.cs" />
+    <Compile Include="Controller\General\Facade.cs" />
+    <Compile Include="Controller\General\LanguageFacade.cs" />
+    <Compile Include="Controller\General\CodeFacade.cs" />
+    <Compile Include="Controller\MainSystem\MainSystemFacade.cs" />
+    <Compile Include="Controller\Translation\TranslationFacade.cs" />
+    <Compile Include="Controller\Visa\VisaFacade.cs" />
+    <Compile Include="Facade.cs" />
+    <Compile Include="Controller\Log\LogFacade.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BlogApplication.Connection\BlogApplication.Connection.csproj">
+      <Project>{323d3d31-ab68-4bd4-8f3f-bce9ba9c9d2f}</Project>
+      <Name>BlogApplication.Connection</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogApplication.Data\BlogApplication.Data.csproj">
+      <Project>{20db5a9f-b84a-4ab5-bb2d-689cf0dc79ed}</Project>
+      <Name>BlogApplication.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogApplication.Entity\BlogApplication.Entity.csproj">
+      <Project>{d5e8ce43-8139-4b67-99c2-dfbd443c70cc}</Project>
+      <Name>BlogApplication.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlogApplication.Framework\BlogApplication.Framework.csproj">
+      <Project>{9c27c668-4f4e-4cb3-a184-f7d18f8f6319}</Project>
+      <Name>BlogApplication.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,276 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.MainSystem.NavigationEditor
+
+@{
+    ViewBag.Title = (Model.ID == 0 ? Html.GetWord("Create Navigation Panel") : Html.GetWord("Edit Navigation Panel"));
+}
+
+<h2>@( Model.ID == 0 ? Html.GetWord("Create Navigation Panel") : Html.GetWord("Edit Navigation Panel")) </h2>
+<input type='hidden' id='ViewMessages' />
+@using (Html.BeginForm("EditNavigationPanel", "SystemMain", FormMethod.Post, new { @class = "form-horizontal", @id = "NavigationPanel" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.EditorLocation)
+    @Html.HiddenFor(model => model.DomainID)
+    @Html.HiddenFor(model => model.EditorData)
+
+    <div class="form-group">
+        <label class="col-lg-12 text-center text-info text-uppercase text-capitalize">
+            @Html.GetTranslatedEnumName(Model.EditorLocation, typeof(EditorPanelType))
+        </label>
+    </div>
+
+    <div class="form-group">
+        <div class="col-lg-12">
+            @if (Model.EditorLocation == Convert.ToByte(EditorPanelType.NavigationPanel))
+            {
+                <div class="topNavigationPanel">
+                    @if (Model.ID > 0)
+                    {
+                        <a href="#">@Html.GetWord("Home")</a>
+                        <a href="#">@Html.GetWord("Blog")</a>
+                    }
+                    else
+                    {
+                        <a href="#">@Html.GetWord("Home")</a>
+                        <a href="#">@Html.GetWord("Blog")</a>
+                        <a href="javascript:void(0)" class="appendNewLink" onclick="appendNewLink()">+</a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="footerSiteMapPanel">
+                    @if (Model.ID > 0)
+                    {
+                        <a href="#">@Html.GetWord("Home")</a>
+                        <a href="#">@Html.GetWord("Blog")</a>
+                    }
+                    else
+                    {
+                        <a href="#">@Html.GetWord("Home")</a>
+                        <a href="#">@Html.GetWord("Blog")</a>
+                        <a href="javascript:void(0)" class="appendNewLink" onclick="appendNewLink()">+</a>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+
+
+    <div class="hidden options">
+        <select class="optionSelect form-control" onchange="optionChange(this)">
+            <option value="-1" selected="selected">@Html.GetWord("Please Select Page Type")</option>
+            <option value="1">@Html.GetWord("Blog Page")</option>
+            <option value="2">@Html.GetWord("Custom Page")</option>
+        </select>
+        <select class="secondOption  form-control hidden" onchange="optionPageChange(this)" style="margin-top: 20px;">
+            <option value="-1" selected="selected">@Html.GetWord("Please Select")</option>
+        </select>
+    </div>
+
+
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@(Model.ID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg " />
+    </div>
+}
+
+@section scripts{
+
+    @Html.ShowMessages()
+
+    @if (Model.ID > 0 && Model.EditorLocation == Convert.ToByte(EditorPanelType.NavigationPanel))
+    {
+        <script>
+            var jsonObject = JSON.parse($.BlogApp.Utility.htmlUnescape('@Model.EditorData'));
+            if (Object.keys(jsonObject).length > 0) {
+                for (var i = 0; i < Object.keys(jsonObject).length; i++) {
+                    $(".topNavigationPanel").append("<a href='#' onclick='removeLink(this)' class='navLink' data-altername ='" + jsonObject[i].name + "' data-pageType='" + jsonObject[i].type + "' data-pageID = '" + jsonObject[i].pageID + "'>" + jsonObject[i].name + "</a>");
+                }
+               
+            }
+            $(".topNavigationPanel").append('<a href="javascript:void(0)" class="appendNewLink" onclick="appendNewLink()">+</a>');
+        </script>
+    }
+
+    @if (Model.ID > 0 && Model.EditorLocation == Convert.ToByte(EditorPanelType.SiteMapPanel))
+    {
+        <script>
+            var jsonObject = JSON.parse($.BlogApp.Utility.htmlUnescape('@Model.EditorData'));
+            if (Object.keys(jsonObject).length > 0) {
+                for (var i = 0; i < Object.keys(jsonObject).length; i++) {
+                    $(".footerSiteMapPanel").append("<a href='#' onclick='removeLink(this)' class='navLink' data-altername ='" + jsonObject[i].name + "' data-pageType='" + jsonObject[i].type + "' data-pageID = '" + jsonObject[i].pageID + "'>" + jsonObject[i].name + "</a>");
+                }
+                
+            }
+            $(".footerSiteMapPanel").append('<a href="javascript:void(0)" class="appendNewLink" onclick="appendNewLink()">+</a>');
+        </script>
+    }
+
+    <script>
+        $("form").submit(function() {
+            @if (Model.EditorLocation == Convert.ToByte(EditorPanelType.NavigationPanel))
+            {
+                <text>
+            var object = {};
+            var counter = 0;
+            $(".topNavigationPanel").find('.navLink').each(function () {
+                var linkObject = { name: $(this).attr("data-altername"), type: $(this).attr("data-pageType"), pageID: $(this).attr("data-pageID") };
+                object[counter] = linkObject;
+                counter++;
+            });
+            var passedObject = JSON.stringify(object);
+            $("#EditorData").val(passedObject);
+            </text>
+            }
+            else
+            {
+                <text> 
+            var object = {};
+            var counter = 0;
+            $(".footerSiteMapPanel").find('.navLink').each(function () {
+                var linkObject = { name: $(this).attr("data-altername"), type: $(this).attr("data-pageType"), pageID: $(this).attr("data-pageID") };
+                object[counter] = linkObject;
+                counter++;
+            });
+            var passedObject = JSON.stringify(object);
+            $("#EditorData").val(passedObject);
+            </text>
+            }
+
+            return true;
+        });
+
+        function appendNewLink() {
+            @if (Model.EditorLocation == Convert.ToByte(EditorPanelType.NavigationPanel))
+            {
+                <text>
+            if ($(".topNavigationPanel").find(".navLink").length < 2) {
+                $.alert({
+                    title: '@Html.GetWord("Select Page Type")',
+                    content: $(".options").html(),
+                    confirm: function () {
+                        var type = $(".content").find(".optionSelect").val();
+                        var pageID = $(".content").find(".secondOption").val();
+                        var name = $(".content").find(".alternateName").val();
+                        if (type != -1 && pageID != -1) {
+                            var appendNewLinkCopy = $(".appendNewLink");
+                            $(".appendNewLink").remove();
+                            $(".topNavigationPanel").append("<a href='#' onclick='removeLink(this)' class='navLink' data-altername ='" + (name == "" || name == undefined ? $(".content").find(".secondOption").find("option:selected").text() : name) + "' data-pageType='" + type + "' data-pageID = '" + pageID + "'>" + (name == "" || name == undefined ? $(".content").find(".secondOption").find("option:selected").text() : name) + "</a>");
+                            $(".topNavigationPanel").append(appendNewLinkCopy);
+                        }
+                    }
+                });
+            } else {
+                $.alert({
+                    title: '@Html.GetWord("Warning")',
+                    content: '@Html.GetWord("Cannot add more than 4 links to Navigation Bar")',
+                    confirm: function () {
+                        return;
+                    }
+                });
+            }
+        
+        </text>
+            }
+                    @if (Model.EditorLocation == Convert.ToByte(EditorPanelType.SiteMapPanel))
+                    {
+                        <text>
+            if ($(".footerSiteMapPanel").find(".navLink").length < 10) {
+                        $.alert({
+                            title: '@Html.GetWord("Select Page Type")',
+                            content: $(".options").html(),
+                            confirm: function () {
+                                var type = $(".content").find(".optionSelect").val();
+                                var pageID = $(".content").find(".secondOption").val();
+                                var name = $(".content").find(".alternateName").val();
+                                if (type != -1 && pageID != -1) {
+                                    var appendNewLinkCopy = $(".appendNewLink");
+                                    $(".appendNewLink").remove();
+                                    $(".footerSiteMapPanel").append("<a href='#' onclick='removeLink(this)' class='navLink' data-altername ='" + (name == "" || name == undefined ? $(".content").find(".secondOption").find("option:selected").text() : name) + "' data-pageType='" + type + "' data-pageID = '" + pageID + "'>" + (name == "" || name == undefined ? $(".content").find(".secondOption").find("option:selected").text() : name) + "</a>");
+                                    $(".footerSiteMapPanel").append(appendNewLinkCopy);
+                                }
+                            }
+                        });
+                    } else {
+                $.alert({
+                    title: '@Html.GetWord("Warning")',
+                    content: '@Html.GetWord("Cannot add more than 6 links to Navigation Bar")',
+                    confirm: function () {
+                        return;
+                    }
+                });
+                    }
+        
+            </text>
+        }
+        }
+
+        function optionChange(object) {
+            $(object).closest(".content").find(".popUpMessage").remove();
+            $(object).closest(".content").find(".alternateName").remove();
+            $(object).closest(".content").find(".secondOption").html('');
+            $(object).closest(".content").find(".secondOption").addClass('hidden');
+            if ($(object).val() == -1)
+                return;
+            if ($(object).val() == 1) {
+                $(object).closest(".content").find(".secondOption").removeClass('hidden');
+                $.ajax({
+                    url: '@Url.Action("GetBlogList", "Ajax")',
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.length == 0) {
+                            $(object).closest(".content").append('<p class="text-center popUpMessage">@Html.GetWord("There is nothing to add")</p>');
+                        } else {
+                            $(object).closest(".content").find(".secondOption").append('<option value="-1">@Html.GetWord("Please Select")</option>');
+                            for (var i = 0; i < response.length; i++) {
+                                $(object).closest(".content").find(".secondOption").append("<option value='" + response[i].id + "'>" + response[i].name + "</option>");
+                            }
+                        }
+                        console.log(response);
+                    }
+                });
+            } else if ($(object).val() == 2) {
+                $(object).closest(".content").find(".secondOption").removeClass('hidden');
+                $.ajax({
+                    url: '@Url.Action("GetCustomPageList", "Ajax")',
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function(response) {
+                        if (response.length == 0) {
+                            $(object).closest(".content").append('<p class="text-center popUpMessage">@Html.GetWord("There is nothing to add")</p>');
+                        } else {
+                            $(object).closest(".content").find(".secondOption").append('<option value="-1">@Html.GetWord("Please Select")</option>');
+                            for (var i = 0; i < response.length; i++) {
+                                $(object).closest(".content").find(".secondOption").append("<option value='" + response[i].id + "'>" + response[i].name + "</option>");
+                            }
+                        }
+                        console.log(response);
+                    }
+                });
+            }
+
+        }
+
+        function optionPageChange(object) {
+            $(object).closest(".content").find(".alternateName").remove();
+            $(object).closest('.content').append('<input class="form-control alternateName" style="margin-top:20px" type="text" placeholder=" @Html.GetWord("Alternate Name")"/>');
+        }
+
+        function removeLink(object) {
+            $.confirm({
+                title: '@Html.GetWord("Remove Link")',
+                content: '@Html.GetWord("Are you approving removal of the link?")',
+                confirm: function() {
+                    $(object).remove();
+                },
+                cancel: function() {
+                    return;
+                }
+            });
+        }
+    </script>
+}

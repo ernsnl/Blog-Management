@@ -1,0 +1,33 @@
+﻿
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Blog.BlogContent>
+
+@{
+    var counter = 1;
+}
+
+
+<div class="blogPartReview">
+    <p class="reviewBlogHeader">@Html.GetWord("Waiting For Fixing")</p>
+    @if (Model.Data != null && Model.Data.Count > 0)
+    {
+
+        foreach (var blog in Model.Data)
+        {
+            <div class="reviewBlog col-lg-12">
+                <a class="reviewCounter" href="#">@counter) </a>
+                <a href="@Url.Action("EditBlog", "Blog", new {@ID = blog.ID})">@blog.Name</a>
+                <a class="reviewLink" href="@Url.Action("EditBlog", "Blog", new {@ID = blog.ID})">@Html.GetWord("Edit Blog")</a>
+            </div>
+            counter++;
+        }
+
+    }
+    else
+    {
+        <p>@Html.GetWord("Nothing to review")</p>
+    }
+</div>
+@section scripts {
+
+}

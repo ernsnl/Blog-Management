@@ -1,0 +1,154 @@
+﻿
+@using BlogApplication.Framework.Extensions.StringExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Blog.BlogContent
+
+@{
+    ViewBag.Title = Html.GetSEOTitle(Model);
+    ViewBag.Description = Html.GetSEODecsription(Model);
+    ViewBag.Keywords = Html.GetSEOKeywords(Model);
+
+    if (Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+    {
+        ViewBag.ogTitle = Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle;
+    }
+    else
+    {
+        ViewBag.ogTitle = Model.Name;
+    }
+
+    if (Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+    {
+        ViewBag.ogDescription = Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().AbstractTranslation;
+    }
+    else
+    {
+        ViewBag.ogDescription = Model.BlogAbstract;
+    }
+
+    ViewBag.ogImage = Html.GetCDNUrl("Blog") + (Model.CoverImgName.Split('.')[0] + "__m" + "." + Model.CoverImgName.Split('.')[1]);
+    ViewBag.ogURL = Request.Url;
+
+}
+
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/froala_editor.min.css" />
+<link rel="stylesheet" href="~/Files/Plugins/frola/css/froala_style.min.css" />
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong>
+                    @if (Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                    {
+                        @Html.Raw(Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle)
+                    }
+                    else
+                    {
+                        @Html.Raw(Model.Name)
+                    } 
+                </strong>
+            </h2>
+            <hr/>
+        </div>
+
+
+
+        <div class="col-lg-12">
+            <img class="lazy img-responsive img-border img-full"
+                 data-src-retina="@Html.GetCDNUrl("Blog")@(Model.CoverImgName.Split('.')[0] + "__o" + "." + Model.CoverImgName.Split('.')[1])"
+                 data-src="@Html.GetCDNUrl("Blog")@(Model.CoverImgName.Split('.')[0] + "__m" + "." + Model.CoverImgName.Split('.')[1])"
+                  src="@Html.GetCDNUrl("Blog")@(Model.CoverImgName.Split('.')[0]+ "__s" + "." + Model.CoverImgName.Split('.')[1])" alt="">
+
+            <hr class="col-lg-12 hrFull" />
+
+            <h2>
+                <br>
+                <small style="text-transform: none">@Html.GetWord("Published On"): @Html.DateFormat(Model.PublishDate.ToString())</small>
+            </h2>
+            <div class="socialPlugins">
+                <p>@Html.GetWord("Share On") : </p>
+                <div class="socialLink facebook">
+                    <a href="javascript:void(0)" onclick="$.BlogAppLive.Facebook.Share('@Request.Url')"><i class="fa fa-facebook-official"></i></a>
+                </div>
+                <div class="socialLink twitter">
+                    <a id="twitterButton" href="javascript:void(0)" onclick="$.BlogAppLive.Twitter.Tweet('@Request.Url')"><i class="fa fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <hr class="col-lg-12 hrFull" />
+
+            <div id="viewBlog" class="col-lg-12 editor fr-view">
+                @if (Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                {
+                    @Html.Raw(Model.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTextDecoded)
+                }
+                else
+                {
+                    @Html.Raw(Model.BlogDecoded)
+                }
+            </div>
+
+            <hr class="col-lg-12 hrFull" />
+
+            @if (Model.Tags.Count > 0)
+            {
+                <div class="col-lg-12 blogTagList">
+                    <div class="tagHeader">@Html.GetWord("Tags"):</div>
+                    <div class="tagList">
+                        @foreach (var tag in Model.Tags)
+                        {
+
+                            <a class="tagLink" href="@Url.RouteUrl("Tag", new {lg = Html.GetLanguageShort(), name = tag.Name.RemoveSpace().ReplaceTurkishCharactes(), ID = tag.ID})">
+                                #@Html.GetWord(tag.Name)
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                <hr class="col-lg-12 hrFull" />
+            }
+
+
+        </div>
+
+        @if (!string.IsNullOrEmpty(Html.GetDisqus().ToString()))
+        {
+            <div id="disqus_thread"></div>
+            <script>
+                /**
+            * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+            */
+                /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+                var disqus_config = function() {
+                    this.page.url = '@Request.Url'; // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = '@Request.Url.Host' + '@Model.ID'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    this.page.title = '@Model.Name';
+                };
+
+                (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+
+                    s.src = '//' + '@Html.GetDisqus()'+ '.disqus.com/embed.js';
+
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                })();
+
+
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script async defer src="//platform.instagram.com/en_US/embeds.js"></script>
+}

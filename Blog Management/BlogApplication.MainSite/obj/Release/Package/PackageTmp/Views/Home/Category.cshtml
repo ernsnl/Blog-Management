@@ -1,0 +1,30 @@
+﻿@using BlogApplication.Framework.Extensions.StringExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Blog.Category>
+
+<h4>@Html.GetWord("Categories")</h4>
+
+<div class="col-lg-12 categoryList">
+    @foreach (var category in Model.Data)
+    {
+        <div class="col-lg-12 categoryItem">
+            <div class="col-xs-8 col-sm-6 categoryImg">
+                <img class="lazy categoryImg img-responsive" data-src="@Html.GetCDNUrl("Category")@(category.ImgName.Split('.')[0]+ "__s" + "." + category.ImgName.Split('.')[1])" />
+            </div>
+            <div class="col-xs-4 col-sm-6 categoryLink">
+                    @if (category.CategoryTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                    {
+                        <a href="@Url.RouteUrl("Category", new { lg = Html.GetLanguageShort(), name = category.CategoryTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().Translation.RemoveSpace().ReplaceTurkishCharactes(), ID = category.ID })">
+                            @category.CategoryTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().Translation
+                            </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.RouteUrl("Category", new { lg = Html.GetLanguageShort(), name = category.Name.RemoveSpace().ReplaceTurkishCharactes(), ID = category.ID })">
+                            @category.Name
+                        </a>
+                    }
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="43f6446a043b42b588d05ae63e3badc5" Name="Diagram1">
+        <EntityTypeShape EntityType="BlogApplicationModel.BlogContent" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.BlogSEOInformation" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Category" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.CustomPageContent" Width="1.5" PointX="7.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.CustomPageSEOInformation" Width="1.5" PointX="10" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Tag" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Code" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Language" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Log" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Domain" Width="1.5" PointX="7.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.SEOInformation" Width="1.5" PointX="10" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.BlogTranslation" Width="1.5" PointX="5.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.CategoryTranslation" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.Common" Width="1.5" PointX="12.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.CustomPageTranslation" Width="1.5" PointX="10" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BlogApplicationModel.User" Width="1.5" PointX="12.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="BlogApplicationModel.FK__BlogConte__Categ__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__BlogSEOIn__BlogI__534D60F1" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__BlogTrans__BlogI__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__CategoryT__Categ__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__CustomPag__Custo__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__CustomPag__Custo__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.FK__SEOInform__Domai__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="BlogApplicationModel.BlogTag" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="BlogApplicationModel.BlogReview" Width="1.5" PointX="5.25" PointY="11.5" />
+        <AssociationConnector Association="BlogApplicationModel.FK__BlogRevie__BlogI__5FB337D6" />
+        <EntityTypeShape EntityType="BlogApplicationModel.NavigationEditor" Width="1.5" PointX="10" PointY="13.5" />
+        <AssociationConnector Association="BlogApplicationModel.FK__Navigatio__Domai__628FA481" />
+        <EntityTypeShape EntityType="BlogApplicationModel.DomainSocial" Width="1.5" PointX="10" PointY="16.375" />
+        <AssociationConnector Association="BlogApplicationModel.FK__DomainSoc__Domai__656C112C" />
+        <EntityTypeShape EntityType="BlogApplicationModel.MailList" Width="1.5" PointX="10" PointY="19.75" />
+        <AssociationConnector Association="BlogApplicationModel.FK__MailList__Domain__68487DD7" />
+        <EntityTypeShape EntityType="BlogApplicationModel.LanguageList" Width="1.5" PointX="10" PointY="22.875" />
+        <AssociationConnector Association="BlogApplicationModel.FK__LanguageL__Domai__6B24EA82" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,181 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Visa.User
+
+
+<div id="left">
+    <div class="media user-media well-small">
+        <a class="user-link" href="@Url.Action("ViewProfile","Visa")">
+            @if (string.IsNullOrEmpty(Model.UserProfilePic))
+            {
+                <img class="lazyImg userProfilePic" data-original="../Files/Images/noImage.png" width="50" height="50"/>
+            }
+            else
+            {
+                <img class="lazyImg userProfilePic" data-original="@Html.GetCDNUrl("User")@Model.UserProfilePic" width="50" height="50"/>
+            }
+        </a>
+        <br />
+        <div class="media-body">
+            <h5 class="media-heading">@Model.FirstName @Model.LastName</h5>
+            <ul class="list-unstyled user-info">
+                @Html.GetTranslatedEnumName(Model.UserType, typeof(UserType))
+            </ul>
+        </div>
+        <br />
+    </div>
+
+    <ul id="menu" class="collapse">
+        <li class="panel">
+            <a href="@Url.Action("Index", "Home")">
+                <i class="icon-table"></i> @Html.GetWord("Dashboard")
+            </a>
+        </li>
+        @if (Model.UserType != Convert.ToByte(UserType.Normal))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#component-nav">
+                    <i class="icon-list-ul"> </i> @Html.GetWord("Pages")
+                </a>
+                <ul class="collapse" id="component-nav">
+                    <li class=""><a href="@Url.Action("BlogList", "Blog")"><i class="icon-angle-right"></i> @Html.GetWord("Blog Page List") </a></li>
+                    <li class=""><a href="@Url.Action("EditBlog", "Blog")"><i class="icon-angle-right"></i> @Html.GetWord("Create Blog Page")</a></li>
+                    <li class=""><a href="@Url.Action("CustomPageList", "Blog")"><i class="icon-angle-right"></i> @Html.GetWord("Custom Page List") </a></li>
+                    <li class=""><a href="@Url.Action("EditCustomPage", "Blog")"><i class="icon-angle-right"></i> @Html.GetWord("Create Custom Page")</a></li>
+                </ul>
+            </li>
+        }
+        @if (Model.UserType != Convert.ToByte(UserType.Translator) && Model.UserType != Convert.ToByte(UserType.Normal) && Model.UserType != Convert.ToByte(UserType.Writer))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#category">
+                    <i class="icon-list-ul"> </i> @Html.GetWord("Categories")
+                </a>
+                <ul class="collapse" id="category">                                   
+                    <li class=""><a href="@Url.Action("CategoryList", "Category")"><i class="icon-angle-right"></i> @Html.GetWord("Category List") </a></li>
+                    <li class=""><a href="@Url.Action("EditCategory", "Category")"><i class="icon-angle-right"></i> @Html.GetWord("Create New Category")</a></li>
+                </ul>
+            </li>
+        }
+        @if (Model.UserType != Convert.ToByte(UserType.Translator) && Model.UserType != Convert.ToByte(UserType.Normal))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#tag-nav">
+                    <i class="icon-tag"> </i> @Html.GetWord("Tags")
+                </a>
+                <ul class="collapse" id="tag-nav">
+                    <li class=""><a href="@Url.Action("TagList", "Tag")"><i class="icon-angle-right"></i> @Html.GetWord("Tag List")</a></li>
+                    <li class=""><a href="@Url.Action("EditTag", "Tag")"><i class="icon-angle-right"></i> @Html.GetWord("Create Tag")</a></li>
+                </ul>
+            </li>
+        }
+        @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin) ||
+                Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Translator) ||
+                Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#form-nav">
+                    <i class="icon-globe"></i> @Html.GetWord("Common Translation")
+                </a>
+                <ul class="collapse" id="form-nav">
+                    <li class=""><a href="@Url.Action("TranslationList", "Translation")"><i class="icon-angle-right"></i>@Html.GetWord("Translation List")</a></li>
+                </ul>
+            </li>
+        }
+        @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin) ||
+         Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Translator) ||
+         Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#general-nav">
+                    <i class="icon-flag"></i> @Html.GetWord("Language")
+                </a>
+                <ul class="collapse" id="general-nav">
+                    <li class=""><a href="@Url.Action("LanguageList", "General")"><i class="icon-angle-right"></i>@Html.GetWord("Language List")</a></li>
+                    <li class=""><a href="@Url.Action("EditLanguage", "General")"><i class="icon-angle-right"></i>@Html.GetWord("Create Language")</a></li>
+                </ul>
+            </li>
+        }
+
+        @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin) || Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#SystemNav">
+                    <i class="icon-desktop"></i> @Html.GetWord("Domains")
+
+                </a>
+                <ul class="collapse" id="SystemNav">
+                    @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+                    {
+                        <li class=""><a href="@Url.Action("EditDomain", "SystemMain", new {@id = 0})"><i class="icon-angle-right"></i>@Html.GetWord("Create New Domain")</a></li>
+                        <li class=""><a href="@Url.Action("DomainList", "SystemMain")"><i class="icon-angle-right"></i> @Html.GetWord("Domain List")</a></li>
+                    }
+                    <li class=""><a href="@Url.Action("UpdateCurrentDomain", "SystemMain")"><i class="icon-angle-right"></i>@Html.GetWord("Update Current Domain")</a></li>
+                </ul>
+            </li>
+        }
+
+        @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin) ||
+         Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+        {
+            <li class="panel ">
+                <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle collapsed" data-target="#user-nav">
+                    <i class="icon-user"></i> @Html.GetWord("Users")
+
+                </a>
+                <ul class="collapse" id="user-nav">
+                    <li class=""><a href="@Url.Action("EditUser", "Visa", new {@id = 0})"><i class="icon-angle-right"></i>@Html.GetWord("Create New User")</a></li>
+                    <li class=""><a href="@Url.Action("UserList", "Visa")"><i class="icon-angle-right"></i> @Html.GetWord("UserList")</a></li>
+                </ul>
+            </li>
+        }
+
+
+
+        <li class="panel">
+            <a href="#" data-parent="#menu" data-toggle="collapse" class="accordion-toggle" data-target="#DDL-nav">
+                <i class=" icon-sitemap"></i> 3 Level Menu
+
+                <span class="pull-right">
+                    <i class="icon-angle-left"></i>
+                </span>
+            </a>
+            <ul class="collapse" id="DDL-nav">
+                <li>
+                    <a href="#" data-parent="#DDL-nav" data-toggle="collapse" class="accordion-toggle" data-target="#DDL1-nav">
+                        <i class="icon-sitemap"></i>&nbsp; Demo Link 1
+
+                        <span class="pull-right" style="margin-right: 20px;">
+                            <i class="icon-angle-left"></i>
+                        </span>
+
+
+                    </a>
+                    <ul class="collapse" id="DDL1-nav">
+                        <li>
+                            <a href="#"><i class="icon-angle-right"></i> Demo Link 1 </a>
+
+                        </li>
+                        <li>
+                            <a href="#"><i class="icon-angle-right"></i> Demo Link 2 </a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="icon-angle-right"></i> Demo Link 3 </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li><a href="#"><i class="icon-angle-right"></i> Demo Link 2 </a></li>
+                <li><a href="#"><i class="icon-angle-right"></i> Demo Link 3 </a></li>
+                <li><a href="#"><i class="icon-angle-right"></i> Demo Link 4 </a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="@Url.Action("Logout","Account")"><i class="icon-signin"></i>@Html.GetWord("Logout") </a>
+        </li>
+
+    </ul>
+
+</div>

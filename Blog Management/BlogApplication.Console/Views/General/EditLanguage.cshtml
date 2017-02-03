@@ -1,0 +1,101 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.General.Language
+
+@{
+    ViewBag.Title = (Model.ID == 0 ? Html.GetWord("Create Language") : Html.GetWord("Edit Language"));
+}
+
+<h2>@( Model.ID == 0 ? Html.GetWord("Create Language") : Html.GetWord("Edit Language")) </h2>
+<input type='hidden' id='ViewMessages' />
+@using (Html.BeginForm("EditLanguage", "General", FormMethod.Post, new { @class = "form-horizontal" , @id="EditLanguage" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    <input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0"/>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Name")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.Name, new {@class = "form-control"  })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Code ISO")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.CodeISO, new {  @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Code ISO - 3")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.CodeISO_3, new {@class = "form-control"})
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Status")</label>
+        <div class="checkbox anim-checkbox ">
+            <input type="checkbox" id="StatusID" name="StatusID" @(Model.StatusID == VariableValue.ConvertStatusTypesByte(StatusType.Active) ? "checked ='checked'" : "" )/>
+            <label class="control-label col-lg-4 emptyLabel" for="StatusID"></label>
+        </div>
+    </div>
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@(Model.ID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg "/>
+        @if (Model.ID > 0)
+        {
+            <input type="button" value="@Html.GetWord("Delete")" id="DeleteLanguage" class="btn btn-primary btn-lg "/>
+        }
+    </div>
+}
+
+@section scripts{
+
+   @Html.ShowMessages()
+    <script>
+        $("#DeleteLanguage").click(function() {
+            $("#DeleteInfo").val(1);
+            $("form").submit();
+        });
+
+        $('#EditLanguage').validate({
+            rules: {
+                Name: "required",
+                CodeISO: {
+                    required: true,
+                    codeISO: true
+                },
+                CodeISO_3: {
+                    required: true,
+                    codeISO3: true
+                }
+            },
+            messages:
+            {
+                Name: '@Html.GetWord("Required")',
+                CodeISO: {
+                    required: '@Html.GetWord("Required")',
+                    codeISO: '@Html.GetWord("Must be in the correct format. Eg : tr-TR")'
+                },
+                CodeISO_3: {
+                    required: '@Html.GetWord("Required")',
+                    codeISO3: '@Html.GetWord("Must be in the correct format. Eg : tur-TUR")'
+                }
+            },
+            errorClass:
+                'help-block',
+            errorElement:
+                'span',
+            highlight:
+                function(element, errorClass, validClass) {
+                    $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+                },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+    </script>
+}

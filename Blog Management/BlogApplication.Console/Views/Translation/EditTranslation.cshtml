@@ -1,0 +1,45 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Translation.Common
+
+@{
+    ViewBag.Title = Html.GetWord("Edit Translation");
+}
+
+<h2>@Html.GetWord("Edit Translation")</h2>
+
+@using (Html.BeginForm("EditTranslation", "Translation", FormMethod.Post, new { @class = "form-horizontal", @id = "EditTranslation" }))
+{
+    @Html.HiddenFor(model => model.Keyword)
+    @Html.HiddenFor(model => model.LanguageID)
+    <input type='hidden' id='ViewMessages' />
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Keyword")</label>
+        <div class="col-lg-4">
+            <input value="@Model.Keyword" type="text" readonly="readonly" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Language")</label>
+        <div class="col-lg-4">
+            <input value="@Html.GetLanguageName(Model.LanguageID)" type="text" readonly="readonly" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Translation")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.Translation, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@Html.GetWord("Edit")" class="btn btn-primary btn-lg " />
+    </div>
+}
+
+@section scripts{
+    @Html.ShowMessages()
+}

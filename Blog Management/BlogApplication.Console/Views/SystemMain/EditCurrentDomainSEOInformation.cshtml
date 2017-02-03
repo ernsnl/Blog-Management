@@ -1,0 +1,113 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.EnumExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.MainSystem.SEOInformation
+
+@{
+    ViewBag.Title = (Model.ID == 0 ? Html.GetWord("Create SEOInformation") : Html.GetWord("Edit SEOInformation"));
+}
+
+<h2>@( Model.ID == 0 ? Html.GetWord("Create SEOInformation") : Html.GetWord("Edit SEOInformation")) </h2>
+<input type='hidden' id='ViewMessages' />
+@using (Html.BeginForm("EditCurrentDomainSEOInformation", "SystemMain", FormMethod.Post, new { @class = "form-horizontal", @id = "EditCurrentDomainSEOInformation" }))
+{
+    @Html.HiddenFor(model => model.ID)
+    @Html.HiddenFor(model => model.DomainID)
+    <input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0" />
+
+    if (Model.ID == 0)
+    {
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Select Language")</label>
+            <div class="col-lg-4">
+                @Html.LanguageDropDownList("LanguageID", new {@placeholder = Html.GetWord("Please Select Language"), @class = "form-control"})
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Select Location")</label>
+            <div class="col-lg-4">
+                @Html.TranslatedDropDownList("LocationID", Model.LocationID == null ? 0 : Model.LocationID, typeof(DomainLocationSEO), false, new { @placeholder = Html.GetWord("Please Select Language"), @class = "form-control" })
+            </div>
+        </div>
+    }
+    else
+    {
+
+
+        @Html.HiddenFor(model => model.LanguageID)
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Language")</label>
+            <div class="col-lg-4">
+                <input value="@Html.GetLanguageName(Convert.ToInt64(Model.LanguageID))" type="text" readonly="readonly" class="form-control"/>
+            </div>
+        </div>
+        @Html.HiddenFor(model => model.LocationID)
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Location")</label>
+            <div class="col-lg-4">
+                @Html.GetTranslatedEnumName(Model.LocationID, typeof(DomainLocationSEO))
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Title")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Description")</label>
+        <div class="col-lg-4">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Keywords")</label>
+        <div class="col-lg-4">
+            @Html.TextAreaFor(model => model.Keyword, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@(Model.ID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg " />
+    </div>
+}
+
+@section scripts{
+
+    @Html.ShowMessages()
+    <script>
+        @if (Model.LanguageID == 0 || Model.LanguageID == null) {
+           <text> $("#LanguageID").chosen(); </text>
+        }
+
+        $('#EditCurrentDomainSEOInformation').validate({
+            rules: {
+                Title: "required",
+                Description: "required",
+                Keyword: "required",
+            },
+            messages:
+            {
+                Title: '@Html.GetWord("Required")',
+                Description: '@Html.GetWord("Required")',
+                Keyword: '@Html.GetWord("Required")'
+            },
+            errorClass:
+                'help-block',
+            errorElement:
+                'span',
+            highlight:
+                function(element, errorClass, validClass) {
+                    $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+                },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+    </script>
+}

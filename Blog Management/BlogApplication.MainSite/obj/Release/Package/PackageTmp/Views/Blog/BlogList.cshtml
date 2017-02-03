@@ -1,0 +1,101 @@
+﻿
+@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.Framework.Extensions.StringExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Blog.BlogContent>
+
+@{
+
+    ViewBag.Title = Html.GetSEOTitle(DomainLocationSEO.ViewNews);
+    ViewBag.Description = Html.GetSEODecsription(DomainLocationSEO.ViewNews);
+    ViewBag.Keywords = Html.GetSEOKeywords(DomainLocationSEO.ViewNews);
+
+}
+
+<div class="row">
+    <div class="box">
+        <div class="col-lg-12">
+            <hr>
+            <h2 class="intro-text text-center">
+                <strong> @Html.GetWord("Blog Pages")</strong>
+            </h2>
+            <hr>
+        </div>
+        @if (Model.TotalDataCount > 0)
+        {
+            foreach (var Blog in Model.Data)
+            {
+                <div class="col-xs-12 text-center blogListItem">
+                    <div class="col-xs-12 blogListItemInner">
+                        <div class="col-xs-12 col-sm-3 blogListImg">
+                            <img data-src="@Html.GetCDNUrl("Blog")@(Blog.CoverImgName.Split('.')[0] + "__m" + "." + Blog.CoverImgName.Split('.')[1])" class="lazy img-responsive img-border img-half" src="@Html.GetCDNUrl("Blog")@(Blog.CoverImgName.Split('.')[0] + "__s" + "." + Blog.CoverImgName.Split('.')[1])" alt="">
+                        </div>
+                        <div class="col-sm-9 col-xs-12">
+                            <div class="col-xs-12 blogListHeaderDiv">
+                                <div class="blogListHeader col-xs-12 col-sm-9">
+                                    @if (Blog.BlogTranslations.Count > 0 && Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                                    {
+                                        @Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle
+                                    }
+                                    else
+                                    {
+                                        @Blog.Name
+                                    }
+                                </div>
+                                <div class="blogListPublishedDate col-xs-12 col-sm-3">
+                                    @Html.DateFormat(Blog.PublishDate.ToString())
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div class="blogAbs col-xs-12">
+                                    @if (Blog.BlogTranslations.Count > 0 && Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any())
+                                    {
+                                        @Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().AbstractTranslation
+                                    }
+                                    else
+                                    {
+                                        @Blog.BlogAbstract
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <a href="@Url.RouteUrl("ViewNews", new
+                                         {
+                                             @id = Blog.ID, @name = (Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).Any() ?
+                                                 Blog.BlogTranslations.Where(op => op.LanguageID == Convert.ToInt64(this.Session["CurrentLanguageID"])).FirstOrDefault().TranslationTitle.ReplaceTurkishCharactes().RemoveSpace() : Blog.Name.ReplaceTurkishCharactes().RemoveSpace())
+                                         })" class="blogViewButton btn btn-default btn-lg">@Html.GetWord("Read More")</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+            }
+            <div class="col-lg-12 text-center">
+                <div id="pagePagination"></div>
+            </div>
+        }
+        else
+        {
+            <div class="col-lg-12 text-center emptyBlogMessage">
+                @Html.GetWord("Sorry! We don't have any blog pages for you right now!")
+                @Html.GetWord("Please come back again later.") :)
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Files/Plugins/pagination/jquery.twbsPagination.js"></script>
+    <script>
+        @if (Model.TotalDataCount > 10)
+        {
+        <text>
+        $("#pagePagination").twbsPagination({
+            totalPages: @(Model.TotalDataCount % 10 == 0 ? (Model.TotalDataCount / 10) : (Model.TotalDataCount / 10 + 1)),
+            href:'?page={{number}}'
+        });
+        </text>
+        }
+    </script>
+}

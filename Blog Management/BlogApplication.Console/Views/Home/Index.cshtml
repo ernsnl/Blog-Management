@@ -1,0 +1,122 @@
+﻿@model BlogApplication.Data.Visa.User
+
+@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+
+
+@{
+    ViewBag.Title = Html.GetWord("Dashboard");
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2> @Html.GetWord("Dashboard") </h2>
+    </div>
+</div>
+
+<hr />
+<input type='hidden' id='ViewMessages' />
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-lg-6 dashboardPart">
+            <div class="col-lg-12 dashboardPartIn">
+                <p style="text-align: center"> Google Analytics Data (Only Admin)</p>
+            </div>
+        </div>
+        @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin)
+                        || Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Editor)
+                        || Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+        {
+            <div class="col-lg-6 dashboardPart">
+                <div class="col-lg-12 dashboardPartIn">
+                    <div class="col-lg-12">
+                        @Html.Action("BlogReview", "Home")
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.Action("BlogNeedFixing", "Home")
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="col-lg-6 dashboardPart">
+            <div class="col-lg-12 dashboardPartIn">
+                <p style="text-align: center"> User Comm.</p>
+            </div>
+        </div>
+        <div class="col-lg-6 dashboardPart">
+            <div class="col-lg-12 dashboardPartIn">
+                @if (Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Admin)
+             || Model.UserType == VariableValue.ConvertUserTypesByte(UserType.Editor)
+             || Model.UserType == VariableValue.ConvertUserTypesByte(UserType.SystemAdmin))
+                {
+                    <div class="col-lg-6">
+                        <div class="col-lg-12 extraOptions">
+                            <h2>@Html.GetWord("Update The Site")</h2>
+                            <hr />
+                            <div class="col-lg-12">
+                                <div class="btn btn-default btn-large text-center" id="clearCache">@Html.GetWord("Update The Site")</div>
+                                <div class="responseMessage"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="col-lg-6">
+                    <div class="col-lg-12 extraOptions"></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-12 extraOptions"></div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-12 extraOptions"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Html.ShowMessages()
+
+    <script>
+        $(document).ready(function() {
+            $("#clearCache").click(function() {
+                $.ajax({
+                    url: '@Url.Action("DropAllCache", "Ajax")',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response) {
+                        if (response.message == "OK") {
+                            $.ajax({
+                                url: '@Html.GetDomainURL()' + "/Ajax/Test",
+                                dataType: 'json',
+                                type: 'GET',
+                                success: function(response2) {
+                                    if (response.message == "OK") {
+                                        $(".responseMessage").text('@Html.GetWord("Site Been Updated")');
+                                        $(".responseMessage").addClass('alert-success');
+                                    } else {
+                                        $(".responseMessage").text('@Html.GetWord("Something Went Wrong")');
+                                        $(".responseMessage").addClass('alert-warning');
+                                    }
+                                }
+                            });
+
+
+                        } else {
+                            $(".responseMessage").text('@Html.GetWord("Something Went Wrong")');
+                            $(".responseMessage").addClass('alert-warning');
+                        }
+                        setTimeout(function() {
+                            $(".responseMessage").text('');
+                            $(".responseMessage").removeClass('alert-warning');
+                            $(".responseMessage").removeClass('alert-success');
+                        }, 5000);
+                    }
+                });
+            });
+        });
+    </script>
+}

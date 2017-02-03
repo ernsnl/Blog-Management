@@ -1,0 +1,103 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.EnumExtensions
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Data.Blog.CustomPageSEOInformation
+
+@{
+    ViewBag.Title = (Model.LanguageID == 0 ? Html.GetWord("Create SEOInformation") : Html.GetWord("Edit SEOInformation"));
+}
+
+<h2>@( Model.LanguageID == 0 ? Html.GetWord("Create SEOInformation") : Html.GetWord("Edit SEOInformation")) </h2>
+<input type='hidden' id='ViewMessages' />
+@using (Html.BeginForm("EditCustomPageSEOInformation", "Blog", FormMethod.Post, new { @class = "form-horizontal", @id = "EditCustomPageSEOInformation" }))
+{
+    @Html.HiddenFor(model => model.CustomPageID)
+    @Html.HiddenFor(model => model.ID)
+    <input type="hidden" name="DeleteInfo" id="DeleteInfo" value="0" />
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("CustomPage")</label>
+        <div class="col-lg-4">
+            <input value="@Model.CustomPageContent.CustomPageUrl" type="text" readonly="readonly" class="form-control" />
+        </div>
+    </div>
+    if (Model.LanguageID == 0 || Model.LanguageID == null)
+    {
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Select Language")</label>
+            <div class="col-lg-4">
+                @Html.LanguageDropDownList("LanguageID", new { @placeholder = Html.GetWord("Please Select Language"), @class = "form-control" })
+            </div>
+        </div>
+    }
+    else
+    {
+        @Html.HiddenFor(model => model.LanguageID)
+        <div class="form-group">
+            <label class="control-label col-lg-4">@Html.GetWord("Language")</label>
+            <div class="col-lg-4">
+                <input value="@Html.GetLanguageName(Convert.ToInt64(Model.LanguageID))" type="text" readonly="readonly" class="form-control" />
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Title")</label>
+        <div class="col-lg-4">
+            @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Description")</label>
+        <div class="col-lg-4">
+            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-lg-4">@Html.GetWord("Keywords")</label>
+        <div class="col-lg-4">
+            @Html.TextAreaFor(model => model.Keyword, new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="form-actions no-margin-bottom" style="text-align: center;">
+        <input type="submit" value="@(Model.LanguageID == 0 ? Html.GetWord("Create") : Html.GetWord("Edit"))" class="btn btn-primary btn-lg " />
+    </div>
+}
+
+@section scripts{
+
+    @Html.ShowMessages()
+    <script>
+        @if (Model.LanguageID == 0 || Model.LanguageID == null) {
+           <text> $("#LanguageID").chosen(); </text>
+        }
+
+        $('#EditCustomPageSEOInformation').validate({
+            rules: {
+                Title: "required",
+                Description: "required",
+                Keyword: "required"
+            },
+            messages:
+            {
+                Title: '@Html.GetWord("Required")',
+                Description: '@Html.GetWord("Required")',
+                Keyword: '@Html.GetWord("Required")'
+            },
+            errorClass:
+                'help-block',
+            errorElement:
+                'span',
+            highlight:
+                function(element, errorClass, validClass) {
+                    $(element).parents('.form-group').removeClass('has-success').addClass('has-error');
+                },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).parents('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+    </script>
+}

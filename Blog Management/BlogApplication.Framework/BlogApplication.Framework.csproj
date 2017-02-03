@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9C27C668-4F4E-4CB3-A184-F7D18F8F6319}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BlogApplication.Framework</RootNamespace>
+    <AssemblyName>BlogApplication.Framework</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Application\Server\CacheFacade.cs" />
+    <Compile Include="Application\Server\CacheManager.cs" />
+    <Compile Include="Application\Web\Client.cs" />
+    <Compile Include="Application\Web\HttpError.cs" />
+    <Compile Include="Application\Web\SiteMap\ChangeFrequency.cs" />
+    <Compile Include="Application\Web\SiteMap\ISiteMapGenerator.cs" />
+    <Compile Include="Application\Web\SiteMap\ISiteMapItem.cs" />
+    <Compile Include="Application\Web\SiteMap\SiteMapGenerator.cs" />
+    <Compile Include="Application\Web\SiteMap\SiteMapItem.cs" />
+    <Compile Include="Application\Web\SiteMap\SiteMapResult.cs" />
+    <Compile Include="Attribute\AttributeHelper.cs" />
+    <Compile Include="Configuration\ConfigurationParameter.cs" />
+    <Compile Include="Cryptography\CryptoFactory.cs" />
+    <Compile Include="Cryptography\HashAlgorithms.cs" />
+    <Compile Include="Extensions\EnumExtension\EnumExtension.cs" />
+    <Compile Include="Extensions\StreamExtensions\StreamExtension.cs" />
+    <Compile Include="Extensions\StringExtensions\StringExtension.cs" />
+    <Compile Include="Extensions\WebExtensions\HttpSessionExtension.cs" />
+    <Compile Include="Extensions\WebExtensions\HtttpRequestExtension.cs" />
+    <Compile Include="Extensions\WebExtensions\UrlHelperExtension.cs" />
+    <Compile Include="FileHelper\ImageCrop.cs" />
+    <Compile Include="FileHelper\FileUploader.cs" />
+    <Compile Include="FileHelper\ImageOptions.cs" />
+    <Compile Include="FileHelper\ResizeImage.cs" />
+    <Compile Include="FTPHelper\FTPProperties.cs" />
+    <Compile Include="FunctionHelper\FunctionHelper.cs" />
+    <Compile Include="Extensions\HtmlExtensions\TranslationExtension.cs" />
+    <Compile Include="Extensions\ListExtensions\IEnumarableExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions\IQueryableExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions\ReflectionExtension.cs" />
+    <Compile Include="MailHelper\MailHelper.cs" />
+    <Compile Include="PleskAPI\Connection\PleskConnectionInfo.cs" />
+    <Compile Include="PleskAPI\NodeModels\DomainFFHostingModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\DomainInfoModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\DomainSFHostingModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\GenSetupModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\HostingModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\SitePrefModel.cs" />
+    <Compile Include="PleskAPI\NodeModels\VRHostModel.cs" />
+    <Compile Include="PleskAPI\RequestHandler\Request.cs" />
+    <Compile Include="PleskAPI\SiteHelper\GetDomainInfo.cs" />
+    <Compile Include="PleskAPI\SiteHelper\SubDomainRequest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResultHelper\CollectionResult.cs" />
+    <Compile Include="ResultHelper\Result.cs" />
+    <Compile Include="ResultHelper\ResultMessage.cs" />
+    <Compile Include="ResultHelper\ObjectResult.cs" />
+    <Compile Include="Utility\RandomHelper.cs" />
+    <Compile Include="Utility\StringHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\Web\Cors\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

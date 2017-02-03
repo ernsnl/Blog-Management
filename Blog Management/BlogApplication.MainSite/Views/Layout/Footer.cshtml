@@ -1,0 +1,21 @@
+﻿@using BlogApplication.WebFramework.HtmlExtensions
+
+
+<div class="row">
+    <div class="box">
+        <div class="footerSection">
+            @Html.Action("SiteMap")
+        </div>
+        <div class="footerSection">
+            @Html.Action("Social")
+        </div>
+        <div class="footerSection">
+            Little Info
+        </div>
+        <div class="text-center footerFull">
+            Copyright &copy; @Html.GetDomainName() @DateTime.Now.Year
+        </div>
+    </div>
+</div>
+
+

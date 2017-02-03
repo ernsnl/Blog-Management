@@ -1,0 +1,385 @@
+﻿.footerSection {
+    border: 1px solid;
+    height: 175px;
+    margin-left: 0.66%;
+    margin-right: 0.66%;
+    margin-top: 15px;
+    width: 32%;
+    float: left;
+    padding: 0px;
+}
+
+.footerFull {
+    width: 98%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 15px;
+    float: left;
+}
+
+@media screen and (max-width:768px) {
+    .footerSection {
+        margin-left: 1%;
+        margin-right: 1%;
+        width: 98%;
+    }
+}
+
+.mainPage {
+    height: 250px;
+    border: 1px solid;
+    margin-top: 15px;
+    overflow-y: scroll;
+}
+
+.mainPage-2 {
+    min-height: 500px;
+    margin-top: 22.5px;
+}
+
+.instagram-media {
+    width: 50% !important;
+    margin-left: 25% !important;
+}
+
+@media screen and (max-width:768px) {
+    .instagram-media {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:910px) {
+    .instagram-media {
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+}
+
+
+@media (min-width:910px) and (max-width: 1176px) {
+    .instagram-media {
+        width: 658px !important;
+        margin-left: 126px !important;
+    }
+}
+
+.navbar {
+    width: 75%;
+    margin-left: 12.5%;
+}
+
+@media screen and (max-width: 1176px) {
+    .navbar {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+.socialPlugins {
+    float: right;
+    width: 100%;
+}
+
+    .socialPlugins > p {
+        float: left;
+        margin-left: calc(100% - 250px);
+        margin-top: 6px;
+    }
+
+.socialLink {
+    float: right;
+    margin-left: 15px;
+}
+
+    .socialLink > a > i {
+        font-size: 40px;
+    }
+
+
+
+.mainPage > h4 {
+    border-bottom: 1px solid;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+
+.categoryItem {
+    padding-bottom: 7.5px;
+    border-bottom: 1px dashed;
+    margin-bottom: 7.5px;
+    padding-top: 7.5px;
+    height: 75px;
+}
+
+.categoryLink {
+    height: 20px;
+    font-size: 15px;
+    margin-top: 13.75px;
+    text-align: center;
+}
+
+    .categoryLink > a {
+        color: black;
+    }
+
+@media screen and (min-width: 968px) and (max-width: 1176px) {
+    .categoryItem {
+        height: 125px;
+    }
+
+    .categoryLink {
+        height: 30px;
+        font-size: 25px;
+        margin-top: 28.75px;
+        text-align: center;
+    }
+}
+
+
+.blogTagList {
+    float: left;
+    width: 100%;
+}
+
+.tagHeader {
+    font-size: 2em;
+    border-bottom: 1px solid;
+    float: left;
+}
+
+.tagList {
+    float: left;
+    width: 100%;
+    padding: 20px;
+}
+
+.tagLink {
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    background-color: #c0c0c0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    float: left;
+    margin-top: 10px;
+}
+
+    .tagLink:hover {
+        text-decoration: none;
+        color: white;
+        background-color: #a0a0a0;
+    }
+
+.hrFull {
+    max-width: 75%;
+    margin-left: 12.5%;
+}
+
+
+
+.bgImg {
+    position: fixed;
+    width: 100%;
+    z-index: -999;
+    height: 100%;
+}
+
+.categoryImg {
+    height: 100%;
+}
+
+.img-slider {
+    height: 450px !important;
+}
+
+.blogSlider {
+    height: 450px !important;
+}
+
+.sliderHeader {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 30px;
+}
+
+    .sliderHeader:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+@media screen and (max-width: 768px) {
+    .img-slider {
+        height: 250px !important;
+    }
+
+    .blogSlider {
+        height: 250px !important;
+    }
+
+    .sliderHeader {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar-brand {
+        width: 225px;
+    }
+}
+
+.footerLabelHeader {
+    border-bottom: 1px solid;
+    float: left;
+    padding-bottom: 5px;
+    width: 100%;
+    text-transform: uppercase;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+
+.siteMap {
+    font-size: 13px;
+    padding-left: 15px;
+}
+
+    .siteMap > li {
+        list-style: circle;
+    }
+
+        .siteMap > li > a {
+            color: black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-left: 20px;
+        }
+
+
+.blogListItem {
+    margin-bottom: 25px;
+    height: 300px;
+    border: 1px solid #c0c0c0;
+}
+
+@media screen and (max-width: 736px) {
+    .blogListItem {
+        height: 500px;
+    }
+}
+
+.blogListItemInner {
+    padding-bottom: 45px;
+    padding-top: 45px;
+}
+
+.blogListImg > img {
+    height: 150px;
+    width: 100%;
+}
+
+.blogListHeaderDiv {
+    border-bottom: 1px solid;
+    height: auto;
+}
+
+
+.blogListHeader {
+    font-size: 1.5em;
+    font-weight: 700;
+    float: left;
+    padding-bottom: 5px;
+}
+
+.blogListPublishedDate {
+    float: right;
+    padding-bottom: 5px;
+    font-size: 1em;
+    margin-top: 10px;
+    margin-right: 0px;
+}
+
+.blogAbs {
+    height: 100px;
+    margin-top: 20px;
+    float: left;
+    width: 100%;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.blogViewButton {
+    float: right;
+}
+
+.emptyBlogMessage {
+    font-size: 1.5em;
+}
+
+.socialLinks {
+    float: left;
+    width: 100%;
+}
+
+    .socialLinks > a {
+        width: 100%;
+        float: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1em;
+        color: black;
+        padding-top: 10px;
+    }
+
+.homeTagLink {
+    padding: 5px;
+    color: black;
+    text-decoration: none;
+    background-color: #c0c0c0;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    margin-left: 10px;
+    float: left;
+    margin-top: 10px;
+}
+
+    .homeTagLink:hover {
+        text-decoration: none;
+        color: white;
+        background-color: #a0a0a0;
+    }
+
+
+.emailList {
+    padding: 15px;
+    border: 1px solid;
+    margin-bottom: 10px;
+}
+
+.emailListMessage {
+    text-align: center;
+    font-family: "Josefin Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 1.25em;
+    font-weight: 700;
+    line-height: normal;
+    color: black;
+    font-style: italic;
+}
+
+.emailListInput {
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+}

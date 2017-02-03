@@ -1,0 +1,79 @@
+﻿@using BlogApplication.Data.GlobalTypes
+@using BlogApplication.WebFramework.HtmlExtensions
+@model BlogApplication.Framework.ResultHelper.CollectionResult<BlogApplication.Data.Translation.Common>
+
+@{
+    ViewBag.Title = Html.GetWord("Translation List");
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2> @Html.GetWord("Translation List") </h2>
+    </div>
+</div>
+
+<hr />
+<input type='hidden' id='ViewMessages' />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @Html.GetWord("Translation Table")
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="LanguageListTable">
+                        <thead>
+                            <tr>
+                                <th>@Html.GetWord("Keyword")</th>
+                                <th>@Html.GetWord("Language")</th>
+                                <th>@Html.GetWord("Translation")</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.TotalDataCount > 0)
+                            {
+                                foreach (var item in Model.Data)
+                                {
+                                    <tr>
+                                        <td>@item.Keyword</td>
+                                        <td>@Html.GetLanguageName(item.LanguageID)</td>
+                                        <td>@item.Translation</td>
+                                        <td>
+                                            <a href="@Url.Action("EditTranslation", "Translation", new {keyword = item.Keyword , languageID = item.LanguageID})">@Html.GetWord("Edit")</a>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="3">@Html.GetWord("Nothing is found")</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div id="pagePagination" class="text-center"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Html.ShowMessages()
+    <script src="~/Files/Plugins/pagination/jquery.twbsPagination.js"></script>
+    <script>
+        
+        @if (Model.TotalDataCount > 25)
+        {
+        <text>
+        $("#pagePagination").twbsPagination({
+              totalPages: @(Model.TotalDataCount % 25 == 0 ? (Model.TotalDataCount / 25) : (Model.TotalDataCount / 25 + 1)),
+              href:'?page={{number}}'
+            });
+        </text>
+        }
+    </script>
+}
+
